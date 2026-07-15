@@ -1,0 +1,63 @@
+/* ============================================================
+   variables.css — дизайн-токены Business Syndicate
+   Единственное место, где живут цвета, отступы, тайминги.
+   Никаких «магических чисел» в остальных файлах.
+============================================================ */
+:root {
+  /* --- Палитра (чёрный / графит / белый / красный) --- */
+  --c-bg:        #0A0A0C;
+  --c-bg-deep:   #060607;
+  --c-graphite:  #121216;
+  --c-card:      #17171D;
+  --c-card-hi:   #1E1E26;
+  --c-line:      #26262E;
+  --c-text:      #F2F2F4;
+  --c-muted:     #9A9AA3;
+  --c-accent:    #FA1E32;
+  --c-accent-dim:#7A0F1A;
+  --c-accent-glow: rgba(250, 30, 50, 0.35);
+
+  /* --- Типографика --- */
+  --font-main: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-display: 'Unbounded', 'Inter', system-ui, sans-serif; /* смелый кино-гротеск для полёта */
+  --fs-hero:    clamp(3rem, 10vw, 9rem);
+  --fs-h2:      clamp(2rem, 5vw, 4rem);
+  --fs-h3:      clamp(1.25rem, 2vw, 1.75rem);
+  --fs-body:    clamp(0.95rem, 1.2vw, 1.125rem);
+  --fs-small:   0.8125rem;
+  --fs-kicker:  0.8125rem;
+  --lh-tight:   1.05;
+  --lh-body:    1.65;
+  --ls-kicker:  0.28em;
+
+  /* --- Пространство (воздух) --- */
+  --space-xs:   0.5rem;
+  --space-s:    1rem;
+  --space-m:    2rem;
+  --space-l:    4rem;
+  --space-xl:   8rem;
+  --space-section: clamp(6rem, 14vh, 12rem);
+  --container:  1240px;
+  --gutter:     clamp(1.25rem, 4vw, 3rem);
+
+  /* --- Радиусы --- */
+  --r-s: 10px;
+  --r-m: 18px;
+  --r-l: 28px;
+
+  /* --- Тайминги и easing (кинематографичные) --- */
+  --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout:  cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:    0.25s;
+  --dur-med:     0.6s;
+  --dur-slow:    1.2s;
+
+  /* --- Слои (z-index карта всего сайта) --- */
+  --z-bg:      -1;
+  --z-content:  1;
+  --z-nav:     100;
+  --z-modal:   200;
+  --z-lightbox:210;
+  --z-cursor:  300;
+  --z-loader:  400;
+}

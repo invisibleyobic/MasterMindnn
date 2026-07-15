@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://businessyndicate.ru/sitemap.xml
