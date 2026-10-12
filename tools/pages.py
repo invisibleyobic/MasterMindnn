@@ -215,7 +215,7 @@ def founder_block(full=False):
       <div class="fact"><b class="num">с 17 лет</b><span>в бизнесе</span></div>
       <div class="fact"><b class="num">9</b><span>проектов под управлением</span></div>
       <div class="fact"><b class="num">3 500+</b><span>предпринимателей прошли через его клуб с 2015 года</span></div>
-      <div class="fact"><b class="num">45 млн ₽</b><span>инвестиций в проекты резидентов за 2025 год</span></div>
+      <div class="fact"><b class="num">2015</b><span>год основания клуба</span></div>
     </div>
     {"" if full else '<a href="rafael.html" class="link-arrow">Подробнее о Рафаэле</a>'}
   </div>
