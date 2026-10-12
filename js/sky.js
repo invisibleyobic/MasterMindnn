@@ -22,7 +22,10 @@
     if (mobile || reduced) {
       video.remove();                       // мобилка/reduced-motion — без видео
     } else {
-      video.src = video.dataset.src;
+      // WebM (VP9) легче на ~20%, MP4 — запасной для Safari/старых браузеров
+      const webm = video.canPlayType('video/webm; codecs="vp9"');
+      video.src = webm ? video.dataset.src.replace(".mp4", ".webm") : video.dataset.src;
+      video.removeAttribute("data-src");    // иначе lazyload.js поставит src второй раз → двойная загрузка
       video.style.opacity = "0";
       video.style.transition = "opacity 1.2s ease";
       const reveal = () => { video.style.opacity = "0.5"; };

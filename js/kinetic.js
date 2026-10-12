@@ -26,16 +26,27 @@
         if (!text.trim()) { continue; }           // пробельный узел — пропускаем
         var frag = document.createDocumentFragment();
         var inserted = 0;
-        for (var c = 0; c < text.length; c++) {
-          var ch = text[c];
-          if (ch === " ") { frag.appendChild(document.createTextNode(" ")); inserted++; continue; }
-          var span = document.createElement("span");
-          span.className = "kin-char";
-          span.textContent = ch;
-          span.style.display = "inline-block";
-          span.style.willChange = "transform";
-          frag.appendChild(span);
-          chars.push(span);
+        /* Буквы собираются в обёртку-слово (nowrap): перенос строки возможен
+           только между словами, а не посреди слова. */
+        var parts = text.split(/(\s+)/);
+        for (var w = 0; w < parts.length; w++) {
+          var part = parts[w];
+          if (!part) continue;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(" ")); inserted++; continue; }
+          var word = document.createElement("span");
+          word.className = "kin-word";
+          word.style.display = "inline-block";
+          word.style.whiteSpace = "nowrap";
+          for (var c = 0; c < part.length; c++) {
+            var span = document.createElement("span");
+            span.className = "kin-char";
+            span.textContent = part[c];
+            span.style.display = "inline-block";
+            span.style.willChange = "transform";
+            word.appendChild(span);
+            chars.push(span);
+          }
+          frag.appendChild(word);
           inserted++;
         }
         node.replaceChild(frag, child);
