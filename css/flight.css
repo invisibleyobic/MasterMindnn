@@ -550,3 +550,10 @@ main {
 @media (max-width: 380px) {
   .founder__facts .stat__number { font-size: 1.3rem !important; }
 }
+/* временная пометка битых видеоотзывов (файлов нет) — убрать после перезаливки */
+.video-card[data-broken] { position: relative; }
+.video-card__broken {
+  position: absolute; top: 10px; left: 10px; z-index: 3;
+  background: #FFD400; color: #111; font: 700 0.75rem/1.2 var(--font-main);
+  padding: 0.35em 0.6em; border-radius: 6px;
+}
