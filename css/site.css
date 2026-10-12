@@ -394,3 +394,42 @@ html[data-season="winter"] .manifesto__text em { color: #E0A595; }
 
 /* якоря не прячутся под липкую шапку */
 [id] { scroll-margin-top: 84px; }
+
+/* ============================================================
+   v3: общее для тем A / B / C (тёмные). Токены тем — css/theme-*.css
+============================================================ */
+.nowrap { white-space: nowrap; }
+.logo { display: inline-flex; align-items: center; gap: .6rem; }
+.logo__mark { width: 30px; height: 30px; flex: none; color: var(--logo, var(--accent)); }
+.footer .logo__mark { width: 40px; height: 40px; }
+
+/* сезонные частицы: осень — листья, зима — снег. Только transform/opacity */
+.season-fx { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+.season-fx i { position: absolute; top: -40px; left: var(--x); width: calc(16px * var(--s)); height: calc(16px * var(--s));
+  border-radius: 0 70% 0 70%; background: var(--leaf, #C8632A); opacity: 0; animation: bs-fall var(--t) linear var(--d) infinite; }
+html[data-season="winter"] .season-fx i { border-radius: 50%; width: calc(7px * var(--s)); height: calc(7px * var(--s)); background: #fff; filter: blur(.5px); animation-name: bs-snow; }
+@keyframes bs-fall { 0% { transform: translate3d(0,0,0) rotate(0); opacity: 0 } 10% { opacity: .85 } 100% { transform: translate3d(-90px,105vh,0) rotate(560deg); opacity: 0 } }
+@keyframes bs-snow { 0% { transform: translate3d(0,0,0); opacity: 0 } 10% { opacity: .8 } 100% { transform: translate3d(30px,105vh,0); opacity: 0 } }
+@media (prefers-reduced-motion: reduce) { .season-fx { display: none; } }
+
+.hero { position: relative; overflow: hidden; }
+.hero > .container { position: relative; z-index: 2; }
+.hero__meta { display: flex; flex-wrap: wrap; gap: .5rem 1.4rem; margin: -0.5rem 0 2rem; color: var(--muted); font-size: .95rem; }
+.hero__meta b { color: var(--ink); font-weight: 600; }
+
+.meet__grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; }
+.meet__grid .figure img { aspect-ratio: 4 / 3; }
+@media (max-width: 900px) { .meet__grid { grid-template-columns: minmax(0, 1fr); } }
+.buybox__row > * { min-width: 0; }
+@media (max-width: 560px) {
+  .logo { font-size: .8rem !important; letter-spacing: .04em !important; gap: .45rem; }
+  .logo__mark { width: 24px; height: 24px; }
+  .header__inner { gap: .75rem; }
+  .buybox { padding: 1.2rem; }
+}
+@media (max-width: 360px) { .logo__word { font-size: .72rem; } }
+.logo .logo__word { font-style: normal; color: var(--ink); font-weight: inherit; }
+/* рубрика: строка текста, а не flex — иначе на телефоне куски разъезжаются */
+.kicker { display: block; }
+.kicker::before { display: inline-block; vertical-align: middle; margin-right: .7em; }
+.hero__center .kicker::before { display: none; }

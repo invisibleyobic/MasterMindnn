@@ -29,6 +29,9 @@
     document.querySelectorAll("[data-season-label]").forEach(function (el) {
       el.textContent = s === "winter" ? "Зимний сезон 2026/27" : "Осенний сезон 2026";
     });
+    document.querySelectorAll("[data-season-word]").forEach(function (el) {
+      el.textContent = s === "winter" ? "Зимний" : "Осенний";
+    });
     document.querySelectorAll(".season-switch button").forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.dataset.set === s));
     });
@@ -37,6 +40,17 @@
   document.querySelectorAll(".season-switch button").forEach(function (b) {
     b.addEventListener("click", function () { store("bs-season", b.dataset.set); setSeason(b.dataset.set); });
   });
+
+  /* ---------- Фоновое видео hero (тема C): только десктоп, один запрос ---------- */
+  var hv = document.querySelector(".hero__video[data-src]");
+  if (hv) {
+    var small = matchMedia("(max-width: 768px)").matches, calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!small && !calm) {
+      hv.src = hv.dataset.src + (hv.canPlayType('video/webm; codecs="vp9"') ? ".webm" : ".mp4");
+      hv.removeAttribute("data-src");
+      var pr = hv.play(); if (pr && pr.catch) pr.catch(function () {});
+    }
+  }
 
   /* ---------- Мобильное меню ---------- */
   var burger = document.querySelector(".burger");

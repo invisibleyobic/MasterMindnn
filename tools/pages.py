@@ -6,7 +6,7 @@
 import html, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "2"  # версия кэша css/js — увеличивать при правках site.css / site.js
+V = "3"  # версия кэша css/js — увеличивать при правках site.css / site.js
 EVENT = {"date": "1 ноября 2026, 18:00", "short": "1 ноября",
          "place": "Hampton by Hilton, ул. Максима Горького, 252, Нижний Новгород"}
 TG = "https://t.me/SALMANOVRS"
@@ -111,25 +111,37 @@ ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 e = html.escape
 
 
+THEME = "a"
+THEMES = {
+    "a": {"name": "A · Тёмная осень", "color": "#0E0C0A", "fonts": "family=Onest:wght@400;500;700;800"},
+    "b": {"name": "B · Клубный", "color": "#070707", "fonts": "family=Manrope:wght@400;500;700;800"},
+    "c": {"name": "C · Город и кино", "color": "#0A0A0C", "fonts": "family=Unbounded:wght@600;800&family=Onest:wght@400;500;700"},
+}
+LOGO = '<svg class="logo__mark" viewBox="0 0 512 512" aria-hidden="true"><path fill="currentColor" d="M32 56H480V164H32Z M32 188H244V456H32V324H154V296H32Z M268 188H480V296H358V324H480V456H268Z"/></svg>'
+FX = '<div class="season-fx" aria-hidden="true">' + "".join(f'<i style="--x:{x}%;--d:{d}s;--t:{t}s;--s:{z}"></i>' for x, d, t, z in [(6,0,15,1),(19,4,19,.7),(33,7,16,.9),(51,2,21,.6),(64,9,15,1.1),(78,5,18,.8),(91,11,17,.7),(44,13,22,1)]) + '</div>'
+
+
 def layout(page, title, desc, body):
     nav = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h == page else ""}>{t}</a>' for h, t in NAV)
     return f"""<!DOCTYPE html>
-<html lang="ru" data-season="autumn">
+<html lang="ru" data-season="autumn" data-theme="{THEME}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
-<meta name="theme-color" content="#F3EEE5">
+<meta name="theme-color" content="{THEMES[THEME]['color']}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:site_name" content="Business Syndicate">
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(desc)}">
 <!-- SLOT: canonical, og:url, og:image — после выбора домена (см. QUESTIONS.md) -->
-<link rel="preload" href="assets/fonts/sourceserif4-normal-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/inter-normal-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?{THEMES[THEME]['fonts']}&display=swap"><!-- SLOT: после выбора темы — свой хостинг шрифтов -->
+<link rel="icon" href="assets/brand/logo-red.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/site.css?v={V}">
+<link rel="stylesheet" href="css/theme-{THEME}.css?v={V}">
 <script src="js/site.js?v={V}" defer></script>
 </head>
 <body>
@@ -138,7 +150,7 @@ def layout(page, title, desc, body):
   <span>Мастермайнд · {EVENT['short']} · Нижний Новгород</span>
 </div></div>
 <header class="header"><div class="container header__inner">
-  <a href="index.html" class="logo">Business <span>Syndicate</span></a>
+  <a href="index.html" class="logo">{LOGO}<span class="logo__word">Business <span>Syndicate</span></span></a>
   <nav class="nav" aria-label="Разделы">{nav}<a href="index.html#apply" class="btn">Подать заявку</a></nav>
   <a href="index.html#apply" class="btn header__cta">Подать заявку</a>
   <button class="burger" type="button" aria-label="Меню" aria-expanded="false"><span></span></button>
@@ -148,7 +160,7 @@ def layout(page, title, desc, body):
 </main>
 <footer class="footer"><div class="container">
   <div class="footer__grid">
-    <div><a href="index.html" class="logo">Business <span>Syndicate</span></a>
+    <div><a href="index.html" class="logo">{LOGO}<span class="logo__word">Business <span>Syndicate</span></span></a>
       <p class="footer__about">Сообщество предпринимателей Нижнего Новгорода и ежемесячный мастермайнд Рафаэля Салманова. С 2015 года.</p></div>
     <div class="footer__col"><h4>Разделы</h4><ul>{"".join(f'<li><a href="{h}">{t}</a></li>' for h, t in NAV)}</ul></div>
     <div class="footer__col"><h4>Связь</h4><ul>
@@ -247,38 +259,83 @@ def apply_block():
 </div></section>'''
 
 
-def page_index():
-    work = [p for p in PEOPLE if p.get("video")]
-    steps = "".join(f'<div class="step reveal"><span class="step__n">{ROMAN[i]}.</span><h3>{e(t)}</h3><p>{e(d)}</p></div>' for i, (t, d) in enumerate(STEPS))
-    codex3 = "".join(f'<div class="codex__item reveal"><span class="codex__n">{ROMAN[i]}</span><h3>{e(CODEX[i][0])}</h3><p>{e(CODEX[i][1])}</p></div>' for i in (0, 2, 3))
-    body = f'''
-<section class="hero"><div class="container hero__grid">
-  <div>
-    <p class="kicker kicker--accent">Мастермайнд Рафаэля Салманова</p>
-    <h1>Здесь твой бизнес <em>разбирают по-честному</em></h1>
-    <p class="lead">Раз в месяц 200–300 предпринимателей Нижнего Новгорода собираются в одном зале. Цифры на стол, прямые вопросы, работа в группах по нишам. Будет жёстко и непросто. Ты уйдёшь с решением вопроса, с которым пришёл.</p>
-    <div class="hero__actions"><a href="#how" class="link-arrow">Как это работает</a></div>
-  </div>
-  <aside class="buybox" aria-label="Ближайшая встреча">
+def buybox():
+    return f'''<aside class="buybox" aria-label="Ближайшая встреча">
     <span class="buybox__tag">Ближайшая встреча</span>
     <p class="buybox__title">Мастермайнд · <span data-season-label>Осенний сезон 2026</span></p>
     <dl class="buybox__rows">
       <div class="buybox__row"><dt>Когда</dt><dd>{EVENT['date']}<br><span class="small" data-days-left></span></dd></div>
       <div class="buybox__row"><dt>Где</dt><dd>Hampton by Hilton,<br>ул. Максима Горького, 252</dd></div>
-      <div class="buybox__row"><dt>Формат</dt><dd>Один вечер, 200–300 предпринимателей, группы по нишам</dd></div>
+      <div class="buybox__row"><dt>Формат</dt><dd>Один вечер, работа в группах по нишам</dd></div>
       <div class="buybox__row"><dt>Доступ</dt><dd>Входит в подписку клуба</dd></div>
     </dl>
     <div class="buybox__price"><b class="num">от 10 000 ₽</b><span>в месяц</span></div>
     <a href="#apply" class="btn btn--block">Подать заявку</a>
     <a href="circles.html" class="btn btn--ghost btn--block">Сравнить круги</a>
     <p class="buybox__note">Вход через заявку и знакомство с командой клуба</p>
-  </aside>
-</div></section>
+  </aside>'''
 
-<div class="container"><figure class="figure reveal">
-  <img src="assets/images/mm-group.webp" alt="Участники мастермайнда Business Syndicate" width="1920" height="944" fetchpriority="low">
-  <figcaption>Участники мастермайнда Business Syndicate. Нижний Новгород</figcaption>
-</figure></div>
+
+LEAD = "Раз в месяц предприниматели Нижнего Новгорода собираются в одном зале. Цифры на стол, прямые вопросы, работа в группах по нишам. Будет жёстко и непросто. Ты уйдёшь с решением вопроса, с которым пришёл."
+META = f'<div class="hero__meta"><span><b>{EVENT["short"]}</b>, 18:00</span><span><b>Hampton by Hilton</b></span><span>от <b>10 000 ₽</b> в месяц</span></div>'
+
+
+def hero_a():
+    return f'''<section class="hero hero--a">{FX}<div class="container hero__grid">
+  <div>
+    <p class="kicker kicker--accent"><span data-season-word>Осенний</span> мастермайнд · Нижний Новгород</p>
+    <h1>Здесь бизнес разбирают <em class="nowrap">по-настоящему</em></h1>
+    <p class="lead">{LEAD}</p>
+    {META}
+    <div class="hero__actions"><a href="#apply" class="btn">Подать заявку</a><a href="#how" class="btn btn--ghost">Как это работает</a></div>
+  </div>
+  <div class="hero__portrait"><img src="assets/images/rafael-portrait.webp" alt="Рафаэль Салманов" width="760" height="1013"><div class="hero__date"><b>01.11</b><span data-season-label>Осенний сезон 2026</span></div></div>
+</div></section>
+<section class="section meet"><div class="container meet__grid">
+  <figure class="figure reveal"><img src="assets/images/mm-group.webp" alt="Участники мастермайнда Business Syndicate" width="1920" height="944" loading="lazy"><figcaption>Участники мастермайнда Business Syndicate. Нижний Новгород</figcaption></figure>
+  {buybox()}
+</div></section>'''
+
+
+def hero_b():
+    return f'''<section class="hero hero--b"><div class="hero__bg" aria-hidden="true"></div>{FX}<div class="container hero__center">
+  <span class="hero__line" aria-hidden="true"></span>
+  <p class="kicker kicker--accent">Мастермайнд Рафаэля Салманова · <span data-season-label>Осенний сезон 2026</span></p>
+  <h1>Круг, где говорят <em>прямо и по делу</em></h1>
+  <p class="lead">{LEAD}</p>
+  {META}
+  <div class="hero__actions"><a href="#apply" class="btn">Подать заявку</a><a href="#how" class="btn btn--ghost">Узнать формат</a></div>
+</div></section>
+<section class="section meet"><div class="container meet__grid meet__grid--text">
+  <div class="reveal"><p class="kicker">Ближайшая встреча</p><h2>Мастермайнд {EVENT['short']}</h2><p class="lead mt-s">Один вечер, твой вопрос и люди, которые прошли этот путь. Доступ входит в подписку клуба.</p></div>
+  {buybox()}
+</div></section>'''
+
+
+def hero_c():
+    return f'''<section class="hero hero--c">
+  <video class="hero__video" muted loop playsinline preload="none" poster="assets/images/flyover-poster.webp" data-src="assets/video/flyover"></video>{FX}
+  <div class="container hero__grid">
+  <div>
+    <p class="kicker kicker--accent">Нижний Новгород · <span data-season-label>Осенний сезон 2026</span></p>
+    <h1>Мастермайнд, где тебя <em>сталкивают с реальностью</em></h1>
+    <p class="lead">{LEAD}</p>
+    <div class="hero__actions"><a href="#how" class="btn btn--ghost">Как это работает</a></div>
+  </div>
+  {buybox()}
+</div></section>
+<div class="container"><figure class="figure reveal"><img src="assets/images/mm-group.webp" alt="Участники мастермайнда Business Syndicate" width="1920" height="944" loading="lazy"><figcaption>Участники мастермайнда Business Syndicate. Нижний Новгород</figcaption></figure></div>'''
+
+
+HEROES = {"a": hero_a, "b": hero_b, "c": hero_c}
+
+
+def page_index():
+    work = [p for p in PEOPLE if p.get("video")]
+    steps = "".join(f'<div class="step reveal"><span class="step__n">{ROMAN[i]}.</span><h3>{e(t)}</h3><p>{e(d)}</p></div>' for i, (t, d) in enumerate(STEPS))
+    codex3 = "".join(f'<div class="codex__item reveal"><span class="codex__n">{ROMAN[i]}</span><h3>{e(CODEX[i][0])}</h3><p>{e(CODEX[i][1])}</p></div>' for i in (0, 2, 3))
+    body = f'''
+{HEROES[THEME]()}
 
 <section class="section manifesto mt-l"><div class="container">
   <p class="kicker">Почему сюда</p>
@@ -422,8 +479,34 @@ def page_rafael():
                   "Рафаэль Салманов — предприниматель и инвестор из Нижнего Новгорода, основатель бизнес-сообщества Business Syndicate. Соцсети и интервью.", body)
 
 
+def fix_paths(html_text):
+    for a in ('"assets/', '"css/', '"js/'):
+        html_text = html_text.replace(a, '"../' + a[1:])
+    return html_text
+
+
+def chooser():
+    cards = "".join(f'<a class="pick pick--{t}" href="{t}/index.html"><span class="pick__k">Версия</span><b>{v["name"]}</b><span class="pick__go">Открыть →</span></a>' for t, v in THEMES.items())
+    return f"""<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business Syndicate — выбор версии</title><meta name="robots" content="noindex"><link rel="icon" href="assets/brand/logo-red.svg" type="image/svg+xml">
+<style>body{{margin:0;min-height:100svh;background:#0A0A0C;color:#F2F2F4;font:16px/1.5 system-ui,sans-serif;display:grid;place-items:center;padding:24px;box-sizing:border-box}}
+.w{{width:100%;max-width:960px}}h1{{font-size:clamp(1.6rem,4vw,2.4rem);margin:0 0 .4rem}}p{{color:#9a9aa3;margin:0 0 2rem}}img{{width:56px;height:56px;margin-bottom:1.2rem}}
+.g{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}}.pick{{display:flex;flex-direction:column;gap:1.2rem;min-height:170px;padding:1.3rem;border-radius:16px;text-decoration:none;color:inherit;border:1px solid #26262e;transition:transform .3s,border-color .3s}}
+.pick:hover{{transform:translateY(-3px);border-color:#ED1824}}.pick b{{font-size:1.3rem}}.pick__k{{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:#9a9aa3}}.pick__go{{margin-top:auto;color:#ED1824;font-weight:600}}
+.pick--a{{background:linear-gradient(160deg,#2A1A10,#0E0C0A)}}.pick--b{{background:linear-gradient(160deg,#1d1a14,#070707)}}.pick--c{{background:linear-gradient(160deg,#1a1013,#0A0A0C)}}
+.v1{{display:inline-block;margin-top:1.6rem;color:#9a9aa3}}@media(max-width:700px){{.g{{grid-template-columns:1fr}}.pick{{min-height:120px}}}}</style></head>
+<body><div class="w"><img src="assets/brand/logo-red.svg" alt="Business Syndicate"><h1>Три версии сайта</h1><p>Тексты и страницы одинаковые — отличается оформление. Выбери, какую доводим.</p>
+<div class="g">{cards}</div><a class="v1" href="v1.html">Старая версия (v1) →</a></div></body></html>"""
+
+
 if __name__ == "__main__":
-    for name, fn in [("index.html", page_index), ("circles.html", page_circles), ("codex.html", page_codex),
-                     ("people.html", page_people), ("rafael.html", page_rafael)]:
-        (ROOT / name).write_text(fn(), encoding="utf-8")
-        print("ok", name)
+    PAGES = [("index.html", page_index), ("circles.html", page_circles), ("codex.html", page_codex),
+             ("people.html", page_people), ("rafael.html", page_rafael)]
+    for t in THEMES:
+        THEME = t
+        (ROOT / t).mkdir(exist_ok=True)
+        for name, fn in PAGES:
+            (ROOT / t / name).write_text(fix_paths(fn()), encoding="utf-8")
+        print("ok", t)
+    (ROOT / "index.html").write_text(chooser(), encoding="utf-8")
+    print("ok chooser")
