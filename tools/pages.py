@@ -486,7 +486,13 @@ def fix_paths(html_text):
 
 
 def chooser():
-    cards = "".join(f'<a class="pick pick--{t}" href="{t}/index.html"><span class="pick__k">Версия</span><b>{v["name"]}</b><span class="pick__go">Открыть →</span></a>' for t, v in THEMES.items())
+    extra = [  # версии вне генератора: свои папки, генератор их не трогает
+        ("e/index.html", "Версия E · новая", "Закрытый клуб", "Чёрные и светлые блоки · ч/б фото · круги строками", "linear-gradient(160deg,#2a2a28,#0B0B0B)"),
+        ("d/index.html", "Версия D", "Туман и стекло", "Слайды на телефоне · бенто", "linear-gradient(160deg,#1c2a2e,#0D1214)"),
+        ("codex/index.html", "Версия Codex", "Осенний город", "Мобильные слайды · подписка · три круга", "linear-gradient(160deg,#283b35,#111718)"),
+    ]
+    cards = "".join(f'<a class="pick" style="background:{bg}" href="{h}"><span class="pick__k">{k}</span><b>{n}</b><span>{d}</span><span class="pick__go">Открыть →</span></a>' for h, k, n, d, bg in extra)
+    cards += "".join(f'<a class="pick pick--{t}" href="{t}/index.html"><span class="pick__k">Версия</span><b>{v["name"]}</b><span class="pick__go">Открыть →</span></a>' for t, v in THEMES.items())
     return f"""<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Business Syndicate — выбор версии</title><meta name="robots" content="noindex"><link rel="icon" href="assets/brand/logo-red.svg" type="image/svg+xml">
 <style>body{{margin:0;min-height:100svh;background:#0A0A0C;color:#F2F2F4;font:16px/1.5 system-ui,sans-serif;display:grid;place-items:center;padding:24px;box-sizing:border-box}}
@@ -495,7 +501,7 @@ def chooser():
 .pick:hover{{transform:translateY(-3px);border-color:#ED1824}}.pick b{{font-size:1.3rem}}.pick__k{{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:#9a9aa3}}.pick__go{{margin-top:auto;color:#ED1824;font-weight:600}}
 .pick--a{{background:linear-gradient(160deg,#2A1A10,#0E0C0A)}}.pick--b{{background:linear-gradient(160deg,#1d1a14,#070707)}}.pick--c{{background:linear-gradient(160deg,#1a1013,#0A0A0C)}}
 .v1{{display:inline-block;margin-top:1.6rem;color:#9a9aa3}}@media(max-width:700px){{.g{{grid-template-columns:1fr}}.pick{{min-height:120px}}}}</style></head>
-<body><div class="w"><img src="assets/brand/logo-red.svg" alt="Business Syndicate"><h1>Три версии сайта</h1><p>Тексты и страницы одинаковые — отличается оформление. Выбери, какую доводим.</p>
+<body><div class="w"><img src="assets/brand/logo-red.svg" alt="Business Syndicate"><h1>Версии Business Syndicate</h1><p>Выбери версию для просмотра и сравнения. Свежие — первыми.</p>
 <div class="g">{cards}</div><a class="v1" href="versions/index.html">Все версии и бэкапы →</a></div></body></html>"""
 
 
