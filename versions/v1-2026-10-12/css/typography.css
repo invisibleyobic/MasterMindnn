@@ -1,0 +1,79 @@
+/* ============================================================
+   typography.css — типографическая система
+   Крупные заголовки, воздух, luxury-ощущение.
+============================================================ */
+body {
+  font-family: var(--font-main);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--c-text);
+  background: var(--c-bg);
+}
+
+/* --- Заголовки --- */
+h1, h2, h3 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: var(--lh-tight);
+  text-wrap: balance;
+}
+
+.hero__title {
+  font-size: var(--fs-hero);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.hero__title .accent { color: var(--c-accent); }
+/* слово — неделимый блок: перенос только МЕЖДУ словами, не внутри */
+.hero__title [data-word] { display: inline-block; white-space: nowrap; }
+
+.section__title { font-size: var(--fs-h2); margin-bottom: var(--space-m); }
+
+/* --- Kicker: маленькая красная строка над заголовком --- */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75em;
+  color: var(--c-accent);
+  font-size: var(--fs-kicker);
+  font-weight: 700;
+  letter-spacing: var(--ls-kicker);
+  text-transform: uppercase;
+  margin-bottom: var(--space-s);
+}
+/* линия перед kicker — деталь дорогой типографики */
+.kicker::before {
+  content: "";
+  width: 2.5em;
+  height: 1px;
+  background: var(--c-accent);
+}
+
+/* --- Вторичный текст --- */
+.lead {
+  color: var(--c-muted);
+  font-size: calc(var(--fs-body) * 1.1);
+  max-width: 42em;
+}
+.small { font-size: var(--fs-small); color: var(--c-muted); }
+
+/* --- Огромные цифры статистики --- */
+.stat__number {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900;
+  color: var(--c-accent);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* --- Цитата --- */
+blockquote {
+  border-left: 3px solid var(--c-accent);
+  padding-left: var(--space-m);
+  font-size: calc(var(--fs-body) * 1.25);
+  font-style: italic;
+  color: var(--c-text);
+}
+
+::selection { background: var(--c-accent); color: #fff; }

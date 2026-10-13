@@ -1,0 +1,58 @@
+/* theme-b.css — «Клубный»: чёрный + шампань, Manrope, строгие формы */
+html[data-theme="b"] {
+  color-scheme: dark;
+  --bg: #070707; --paper: #0E0E0E; --surface: #151515; --dark: #0B0B0B;
+  --ink: #ECE9E2; --ink-2: #C8C3B8; --muted: #8A867E; --line: #22201C; --line-strong: #4A4236;
+  --accent: #C9AE7A; --accent-hi: #D9C192; --accent-soft: #1C1811; --on-accent: #0B0B0B; --on-dark: #ECE9E2;
+  --leaf: #C9AE7A; --logo: #ECE9E2;
+  --serif: "Manrope", system-ui, sans-serif; --sans: "Manrope", system-ui, sans-serif;
+  --hw: 700; --radius: 0px;
+}
+html[data-theme="b"][data-season="winter"] {
+  --bg: #07080A; --paper: #0D0F12; --surface: #14171B; --line: #1F242A; --line-strong: #3C4650;
+  --accent: #C3CCD6; --accent-hi: #DCE3EA; --accent-soft: #151A20; --leaf: #fff;
+}
+/* --- общее тёмное (вставлено во все темы) --- */
+body { font-family: var(--sans); }
+h1, .display { font-family: var(--serif); font-weight: var(--hw, 800); letter-spacing: var(--ht, -0.03em); line-height: 1; }
+h2, .h2 { font-family: var(--serif); font-weight: var(--hw, 800); letter-spacing: var(--ht, -0.025em); line-height: 1.05; }
+h3, .h3 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.01em; }
+h1 em, h2 em { font-style: normal; }
+.step__n, .codex__n, .quote, .figure figcaption, .apply__points li span, .manifesto__text em { font-style: normal; }
+.figure figcaption { font-family: var(--sans); font-size: .85rem; }
+.quote { font-family: var(--sans); font-weight: 500; }
+.steps, .codex, .qa, .teaser-links, .rule-top { border-top-color: var(--line-strong); }
+.figure img, .face img, .founder__photo img, .review__media img { filter: saturate(.9) contrast(1.05); }
+.buybox { box-shadow: 0 40px 80px -50px rgba(0,0,0,.8); }
+.manifesto .kicker, .manifesto__sign, .footer__about, .footer__bottom, .footer__col h4 { color: var(--muted); }
+.footer .logo span span { color: var(--accent); }
+.logo span span { color: var(--accent); font-style: normal; font-weight: inherit; }
+.logo { font-family: var(--serif); font-weight: 700; letter-spacing: .02em; text-transform: uppercase; font-size: 1rem; }
+.manifesto__text { font-family: var(--serif); font-weight: 700; letter-spacing: -0.02em; }
+.page-head { border-bottom-color: var(--line); }
+.field input, .field select, .field textarea { background: var(--surface); }
+.hero { min-height: min(100svh, 920px); display: flex; align-items: center; }
+html[data-theme="b"] .btn { text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; }
+html[data-theme="b"] .btn--ghost { background: transparent; color: var(--ink); border-color: color-mix(in srgb, var(--ink) 35%, transparent); }
+html[data-theme="b"] h1 em, html[data-theme="b"] h2 em { color: var(--accent); }
+html[data-theme="b"] .kicker { letter-spacing: .24em; }
+html[data-theme="b"] .logo { letter-spacing: .28em; font-size: .85rem; }
+.hero--b { align-items: flex-end; min-height: min(100svh, 940px); }
+.hero--b .hero__bg { position: absolute; inset: 0; background: url(../../../assets/images/mm-group.webp) center 30%/cover; filter: grayscale(.35) sepia(.3) brightness(.55) contrast(1.1); }
+.hero--b .hero__bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,7,7,.25), rgba(7,7,7,.6) 45%, var(--bg) 94%); }
+.hero__center { text-align: center; padding-top: 7rem; padding-bottom: 4rem; display: flex; flex-direction: column; align-items: center; }
+.hero__center .kicker::before { display: none; }
+.hero__center h1 { font-size: clamp(2.3rem, 5.6vw, 4.8rem); max-width: 14em; }
+.hero__center .lead { margin: 1.4rem auto 2rem; color: var(--ink-2); }
+.hero__line { width: 1px; height: 60px; background: var(--accent); margin-bottom: 1.6rem; }
+.hero--b .hero__meta { justify-content: center; margin: 0 0 2rem; padding: .9rem 1.6rem; border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); text-transform: uppercase; letter-spacing: .08em; font-size: .82rem; }
+.hero--b .hero__meta b { color: var(--accent); }
+.hero--b .hero__actions { justify-content: center; }
+.meet__grid--text { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+/* круги: без выделения «Медиа» — все три равны (замечание заказчика) */
+html[data-theme="b"] .tier--feature { border-color: var(--line); box-shadow: none; }
+html[data-theme="b"] .tier .btn { background: transparent; color: var(--ink); border-color: color-mix(in srgb, var(--ink) 35%, transparent); }
+html[data-theme="b"] .tier .btn:hover { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+html[data-theme="b"] .tier__list li::before { width: 5px; height: 5px; transform: rotate(45deg); top: .55em; }
+@media (max-width: 900px) { .meet__grid--text { grid-template-columns: minmax(0, 1fr); } }
+html[data-theme="b"] .manifesto__text em { color: var(--accent); }

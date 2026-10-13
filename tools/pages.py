@@ -496,7 +496,7 @@ def chooser():
 .pick--a{{background:linear-gradient(160deg,#2A1A10,#0E0C0A)}}.pick--b{{background:linear-gradient(160deg,#1d1a14,#070707)}}.pick--c{{background:linear-gradient(160deg,#1a1013,#0A0A0C)}}
 .v1{{display:inline-block;margin-top:1.6rem;color:#9a9aa3}}@media(max-width:700px){{.g{{grid-template-columns:1fr}}.pick{{min-height:120px}}}}</style></head>
 <body><div class="w"><img src="assets/brand/logo-red.svg" alt="Business Syndicate"><h1>Три версии сайта</h1><p>Тексты и страницы одинаковые — отличается оформление. Выбери, какую доводим.</p>
-<div class="g">{cards}</div><a class="v1" href="v1.html">Старая версия (v1) →</a></div></body></html>"""
+<div class="g">{cards}</div><a class="v1" href="versions/index.html">Все версии и бэкапы →</a></div></body></html>"""
 
 
 if __name__ == "__main__":
