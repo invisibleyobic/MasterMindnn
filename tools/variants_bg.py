@@ -65,7 +65,7 @@ VIDEO = '<video autoplay muted loop playsinline preload="metadata"></video>'
 
 def copy_v1_assets():
     """Свои копии css/js v1 — чтобы варианты работали и там, где лежат старые файлы (ветка main / живой домен)."""
-    dst = ROOT / "variants" / "_v1"
+    dst = ROOT / "variants" / "v1-assets"
     for sub, ext in (("css", "*.css"), ("js", "*.js")):
         (dst / sub).mkdir(parents=True, exist_ok=True)
         for f in (ROOT / sub).glob(ext):
@@ -79,7 +79,7 @@ def base():
     # пути: вариант лежит в variants/<id>/ — всё локальное на два уровня вверх
     h = re.sub(r'(href|src|data-src|poster|data-video-local)="(?!https?:|#|data:|mailto:|tel:)([^"]+)"', r'\1="../../\2"', h)
     h = h.replace('url(assets/', 'url(../../assets/')
-    h = re.sub(r'"\.\./\.\./(css|js)/', r'"../_v1/\1/', h)
+    h = re.sub(r'"\.\./\.\./(css|js)/', r'"../v1-assets/\1/', h)  # без «_» в начале: GitHub Pages (Jekyll) не отдаёт такие папки
     h = h.replace('<meta name="robots" content="noindex, follow">', '<meta name="robots" content="noindex">')
     # облёт неба (sky.js) не грузим — фоном теперь ролик MasterMind
     h = re.sub(r'<video class="sky__video" data-src="[^"]*"[^>]*></video>', '', h)
