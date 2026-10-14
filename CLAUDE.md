@@ -82,5 +82,6 @@
 - **Живой сайт: http://asherbakov.ru/MasterMindnn/** — GitHub Pages репозитория `invisibleyobic/MasterMindnn`, ветка `main` (там сейчас v1). Домен `asherbakov.ru` привязан к `invisibleyobic.github.io`.
 - **HTTPS не работает** (13.10): сертификат не выписан на asherbakov.ru — браузер пишет «небезопасно». Лечится в Settings → Pages → Enforce HTTPS (после проверки DNS).
 - Новые версии (a–e, codex) лежат в ветке `claude/peaceful-allen-zumohw` и на домене НЕ видны, пока не попадут в `main`.
+- **Решение 14.10: оба репозитория (MasterMindnn и invisibleyobic.github.io) остаются ПУБЛИЧНЫМИ** — платить за GitHub Pro нет возможности. Домен asherbakov.ru держится на репозитории `invisibleyobic.github.io` (файл CNAME). Если репозиторий сделать приватным, Pages выключается, а при возврате в public его надо включать вручную: Settings → Pages → Deploy from branch `main` / root + Custom domain. После включения домен оживает через ~5–10 мин (кэш CDN).
 - Репозиторий публичный. На бесплатном GitHub Pages для приватного репозитория НЕ работает: приватность = сайт пропадёт, нужен GitHub Pro или другой хостинг (Cloudflare Pages / Netlify — бесплатно из приватного репо).
 - canonical / og / sitemap / robots привести к реальному адресу перед индексацией.
