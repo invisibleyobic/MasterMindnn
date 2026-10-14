@@ -49,13 +49,23 @@ JS = """
     v.poster = poster();
     if (calm) return;
     v.src = file(); seamless(v);
+    /* нет горизонтального файла — берём вертикальный (обрежется по центру), чтобы не стоял постер */
+    v.addEventListener("error", function () {
+      if (v.dataset.reel) return;           /* ошибка ролика со звуком — фон не подменяем */
+      var alt = V + "mastermind-bg-mobile-9x16" + webm;
+      if (v.src.indexOf("mobile") === -1) { v.src = alt; var q = v.play(); if (q && q.catch) q.catch(function () {}); }
+    });
     var p = v.play(); if (p && p.catch) p.catch(function () {});
   });
   /* вариант «блок со звуком»: по кнопке включаем полный ролик со звуком */
   var btn = document.querySelector(".mm-watch__btn");
   if (btn) btn.addEventListener("click", function () {
     var v = document.querySelector(".mm-watch__frame video");
-    v.src = V + (mob ? "mastermind-reel-9x16-social.mp4" : "mastermind-reel-16x9-social.mp4");
+    v.dataset.reel = "1";
+    var ext = webm === ".webm" ? ".webm" : ".mp4";
+    v.src = V + (mob ? "mastermind-reel-9x16-social" : "mastermind-reel-16x9-social") + ext;
+    /* нет горизонтального ролика со звуком — показываем вертикальный */
+    v.addEventListener("error", function () { if (v.src.indexOf("9x16") === -1) { v.src = V + "mastermind-reel-9x16-social" + ext; var q = v.play(); if (q && q.catch) q.catch(function () {}); } });
     v.muted = false; v.loop = false; v.controls = true; v.currentTime = 0;
     var p = v.play(); if (p && p.catch) p.catch(function () {});
     btn.hidden = true;

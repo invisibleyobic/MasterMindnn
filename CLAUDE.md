@@ -58,7 +58,7 @@
 ## 4б. Ролик MasterMind фоном (HANDOFF 14.10)
 - Основа — текущий сайт (`v1.html` с правками). Варианты: `variants/bg-hero/`, `variants/bg-fullpage/`, `variants/bg-section/`, список — `variants/index.html`. Сборка: `python3 tools/variants_bg.py` (не править html руками). main и живой сайт не трогаем; в main — только выбранный вариант.
 - Видео лежат в `assets/video/mastermind/` с именами из HANDOFF (`mastermind-bg-1080p/720p/mobile-9x16`, `...-poster(.jpg|-mobile.jpg)`, `mastermind-reel-16x9|9x16-social.mp4`). К каждому bg-mp4 делать `.webm` (VP9, crf ~40, без звука) — JS отдаёт webm Chrome/Android, mp4 — Safari.
-- Сейчас постеры ВРЕМЕННЫЕ (кадр из ролика), самих видео ещё нет. Тестовый Chromium в контейнере не играет H.264 — проверять воспроизведение на webm.
+- 14.10 получен вертикальный ролик со звуком (1080×1920, 11.6 с) → сделаны `mastermind-bg-mobile-9x16.mp4/.webm` (без звука, 720p, ~2.3–2.6 МБ), `mastermind-bg-poster-mobile.jpg` (кадр MASTERMIND), `mastermind-reel-9x16-social.mp4/.webm` (со звуком, ~3.5–5.5 МБ). Горизонтального 16:9 пока НЕТ: компьютер подхватывает вертикальный (обрезка по центру); `mastermind-bg-poster.jpg` — временный кадр. Заказчик будет пользоваться ДВУМЯ роликами (вертикальный + горизонтальный). Тестовый Chromium в контейнере не играет H.264 — проверять воспроизведение на webm.
 
 ## 5. Решения заказчика (фиксировано)
 - **Название клуба — Business Syndicate** (переименован из «Связи Решают»). Логотип новый — файл запросить у заказчика.
