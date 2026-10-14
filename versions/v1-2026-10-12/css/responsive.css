@@ -1,0 +1,59 @@
+/* ============================================================
+   responsive.css — адаптация: 4K / UltraWide / Laptop /
+   Tablet / Mobile. Каждый брейкпоинт — осознанная пересборка.
+============================================================ */
+
+/* ---------- 4K и UltraWide (≥1920px): больше воздуха ---------- */
+@media (min-width: 1920px) {
+  :root {
+    --container: 1480px;
+    --space-section: 16rem;
+  }
+}
+
+/* ---------- Laptop (≤1200px) ---------- */
+@media (max-width: 1200px) {
+  .founder__grid { gap: var(--space-l); }
+}
+
+/* ---------- Tablet (≤980px) ---------- */
+@media (max-width: 980px) {
+  .nav__links { display: none; } /* на планшете — только лого и CTA */
+  .who__grid { grid-template-columns: 1fr; }
+  .who__stats { grid-template-columns: repeat(2, 1fr); }
+  .videos { grid-template-columns: repeat(2, 1fr); }
+  .faces { grid-template-columns: repeat(2, 1fr); }
+  .tariffs { grid-template-columns: 1fr; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .founder__grid { grid-template-columns: 1fr; }
+  .founder__portrait { max-width: 380px; }
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+  .gallery__item:nth-child(1) { grid-column: span 2; }
+  .footer__cols { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------- Mobile (≤640px) ---------- */
+@media (max-width: 640px) {
+  :root {
+    --space-section: 5rem;
+    /* SYNDICATE (9 букв) должен помещаться в строку на любом телефоне */
+    --fs-hero: clamp(2rem, 12.5vw, 3.6rem);
+  }
+  .videos { grid-template-columns: 1fr; }
+  .countdown { flex-wrap: wrap; }
+  .countdown__cell { min-width: calc(50% - var(--space-s)); }
+  .hero__actions .btn { width: 100%; }
+  /* роадмап: линия уходит влево, карточки в один столбец */
+  .path__track::before { left: 10px; }
+  .path__step { justify-content: flex-start !important; }
+  .path__card { width: calc(100% - 2.4rem); margin-left: 2.4rem; }
+  .footer__cols { grid-template-columns: 1fr; }
+  .gallery { grid-auto-rows: 130px; }
+  .rule { gap: var(--space-s); }
+}
+
+/* ---------- Small mobile (≤380px) ---------- */
+@media (max-width: 380px) {
+  .faces { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr; }
+  .gallery__item:nth-child(1) { grid-column: span 1; }
+}

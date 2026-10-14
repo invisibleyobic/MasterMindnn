@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="ru" data-skin="bold">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ================= SEO ================= -->
+  <title>bg-section — вариант фона</title>
+  <meta name="description" content="Business Syndicate — сообщество предпринимателей, улучшающих пространство вокруг. Мастермайнд Рафаэля Салманова в Нижнем Новгороде. Связи решают.">
+  <meta name="keywords" content="Business Syndicate, мастермайнд, Рафаэль Салманов, бизнес-клуб Нижний Новгород, нетворкинг, связи решают">
+  <meta name="robots" content="noindex"><!-- архив v1: не индексировать -->
+
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Business Syndicate">
+  <meta property="og:title" content="Business Syndicate — Мастермайнд Рафаэля Салманова">
+  <meta property="og:description" content="Сообщество предпринимателей, улучшающих пространство вокруг. В тёмные времена хорошо видно светлых людей.">
+  <meta property="og:url" content="https://businessyndicate.ru/">
+  <meta property="og:image" content="https://businessyndicate.ru/assets/images/og-cover.jpg"><!-- SLOT -->
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Business Syndicate — Мастермайнд Рафаэля Салманова">
+  <meta name="twitter:description" content="Сообщество предпринимателей, улучшающих пространство вокруг.">
+  <meta name="twitter:image" content="https://businessyndicate.ru/assets/images/og-cover.jpg">
+
+  <meta name="theme-color" content="#0A0A0C">
+
+  <!-- ============ Schema.org JSON-LD ============ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://businessyndicate.ru/#org",
+        "name": "Business Syndicate",
+        "url": "https://businessyndicate.ru/",
+        "slogan": "Связи решают",
+        "description": "Сообщество предпринимателей, улучшающих пространство вокруг",
+        "founder": { "@id": "https://businessyndicate.ru/#founder" },
+        "areaServed": "Нижний Новгород"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://businessyndicate.ru/#founder",
+        "name": "Рафаэль Салманов",
+        "jobTitle": "Основатель Business Syndicate",
+        "description": "Предприниматель, инвестор, основатель крупнейшего бизнес-сообщества Нижнего Новгорода",
+        "url": "https://r.salmanov.one",
+        "sameAs": ["https://t.me/SALMANOVRS", "https://r.salmanov.one"]
+      },
+      {
+        "@type": "Event",
+        "name": "Мастермайнд Рафаэля Салманова",
+        "startDate": "2026-08-01T18:00:00+03:00",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": { "@type": "Place", "name": "Нижний Новгород", "address": { "@type": "PostalAddress", "addressLocality": "Нижний Новгород", "addressCountry": "RU" } },
+        "organizer": { "@id": "https://businessyndicate.ru/#org" },
+        "offers": [
+          { "@type": "Offer", "name": "Резидент", "price": "10000", "priceCurrency": "RUB", "availability": "https://schema.org/InStock" },
+          { "@type": "Offer", "name": "Медиа", "price": "30000", "priceCurrency": "RUB", "availability": "https://schema.org/InStock" },
+          { "@type": "Offer", "name": "VIP", "price": "50000", "priceCurrency": "RUB", "availability": "https://schema.org/LimitedAvailability" }
+        ],
+        "image": "https://businessyndicate.ru/assets/images/og-cover.jpg",
+        "description": "Мастермайнд на 200–300 предпринимателей: разборы бизнесов, нетворкинг, съёмки."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Это разовое мероприятие или подписка?", "acceptedAnswer": { "@type": "Answer", "text": "Мастермайнд — регулярный формат клуба. Участие — ежемесячная подписка по одному из трёх кругов." } },
+          { "@type": "Question", "name": "Что если мой бизнес маленький?", "acceptedAnswer": { "@type": "Answer", "text": "Размер не главное. Главное — ты действуешь и готов быть полезным кругу." } },
+          { "@type": "Question", "name": "Как проходит отбор в VIP?", "acceptedAnswer": { "@type": "Answer", "text": "Личное собеседование с Рафаэлем и командой клуба." } }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://businessyndicate.ru/" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ============ Шрифт: Inter (фирменная типографика) ============ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <!-- ============ Стили (порядок важен) ============ -->
+  <link rel="stylesheet" href="../_v1/css/variables.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/reset.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/typography.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/components.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/sections.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/animations.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/responsive.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/upgrade.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/flight.css?v=11">
+
+  <!-- ============ Библиотеки (CDN) ============ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+
+<style id="mm-bg-css">
+.mm-bg { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; background: #05050a center/cover no-repeat; }
+.mm-bg video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.mm-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.78)); }
+.hero > .container, .hero__content { position: relative; z-index: 2; }
+.mm-bg--fixed { position: fixed; z-index: -1; opacity: .32; }
+.mm-bg--fixed::after { background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.6)); }
+.mm-watch { position: relative; padding: clamp(4rem, 9vw, 7rem) 0; }
+.mm-watch__frame { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #05050a center/cover no-repeat; box-shadow: 0 40px 120px -40px rgba(0,0,0,.8); }
+.mm-watch__frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.mm-watch__btn { position: absolute; left: 50%; bottom: 1.4rem; transform: translateX(-50%); z-index: 2; display: inline-flex; gap: .6em; align-items: center;
+  padding: .85em 1.5em; border: 0; border-radius: 999px; background: rgba(255,255,255,.92); color: #0a0a0c; font: 700 .95rem/1 inherit; cursor: pointer; }
+.mm-watch__btn::before { content: ""; border-left: 10px solid #FA1E32; border-top: 7px solid transparent; border-bottom: 7px solid transparent; }
+.mm-watch__btn[hidden] { display: none; }
+@media (max-width: 640px) { .mm-watch__frame { aspect-ratio: 9 / 16; max-height: 78svh; margin: 0 auto; } }
+@media (prefers-reduced-motion: reduce) { .mm-bg video { display: none; } }
+</style>
+</head>
+
+<body>
+  <!-- ============ АМБИЕНТНЫЙ ФОН: дышащие размытые формы ============ -->
+  <!-- ============ НЕБО ПОЛЁТА: ночной Нижний с высоты ============
+       Слои: градиент неба → искры (canvas) → облака → силуэт города →
+       дымка → кремль (посадка). Управляет sky.js.
+       Видео-облёт с дрона встанет сюда без переделки:
+       <video class="sky__video" src="../../assets/video/flyover.mp4" autoplay muted loop playsinline></video>
+  -->
+  <div class="sky" aria-hidden="true">
+    <div class="sky__grad"></div>
+    
+    <canvas class="sky__stars"></canvas>
+
+    <div class="sky__clouds">
+      <i class="sky__cloud sky__cloud--1"></i>
+      <i class="sky__cloud sky__cloud--2"></i>
+      <i class="sky__cloud sky__cloud--3"></i>
+      <i class="sky__cloud sky__cloud--4"></i>
+    </div>
+
+    <div class="sky__city sky__city--far">
+      <svg viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax meet">
+        <path d="M0,260 L0,190 L80,190 L80,160 L160,160 L160,200 L240,200 L240,150 L330,150 L330,185 L430,185 L430,165 L520,165 L520,200 L620,200 L620,155 L720,155 L720,190 L820,190 L820,170 L910,170 L910,200 L1010,200 L1010,160 L1110,160 L1110,195 L1210,195 L1210,170 L1310,170 L1310,200 L1440,200 L1440,260 Z"/>
+      </svg>
+    </div>
+
+    <div class="sky__city sky__city--near">
+      <svg viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax meet">
+        <path d="M0,260 L0,150 L60,150 L60,110 L120,110 L120,170 L180,170 L180,90 L230,90 L230,150 L300,150 L300,60 L340,60 L340,140 L420,140 L420,120 L470,120 L470,175 L540,175 L540,100 L600,100 L600,150 L680,150 L680,70 L720,70 L720,130 L800,130 L800,110 L860,110 L860,165 L920,165 L920,95 L980,95 L980,145 L1060,145 L1060,120 L1110,120 L1110,175 L1180,175 L1180,85 L1230,85 L1230,150 L1310,150 L1310,115 L1370,115 L1370,160 L1440,160 L1440,260 Z"/>
+        <rect class="win" x="196" y="104" width="6" height="9"/><rect class="win" x="210" y="120" width="6" height="9"/>
+        <rect class="win" x="312" y="78" width="6" height="9"/><rect class="win" x="312" y="98" width="6" height="9"/><rect class="win" x="324" y="118" width="6" height="9"/>
+        <rect class="win" x="556" y="116" width="6" height="9"/><rect class="win" x="578" y="132" width="6" height="9"/>
+        <rect class="win" x="692" y="88" width="6" height="9"/><rect class="win" x="704" y="108" width="6" height="9"/>
+        <rect class="win" x="936" y="112" width="6" height="9"/><rect class="win" x="958" y="128" width="6" height="9"/>
+        <rect class="win" x="1196" y="104" width="6" height="9"/><rect class="win" x="1210" y="120" width="6" height="9"/>
+      </svg>
+    </div>
+
+    <div class="sky__haze"></div>
+
+    <div class="sky__kremlin">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax meet">
+        <ellipse class="glow" cx="640" cy="172" rx="580" ry="140"/>
+        <path d="M0,320 L0,238 L108,238 L108,150 L128,106 L148,150 L148,238 L280,238 L280,150 L300,106 L320,150 L320,238 L620,238 L620,132 L640,84 L660,132 L660,238 L960,238 L960,150 L980,106 L1000,150 L1000,238 L1180,238 L1180,150 L1200,106 L1220,150 L1220,238 L1440,238 L1440,320 Z"/>
+        <rect x="330" y="226" width="16" height="12"/><rect x="364" y="226" width="16" height="12"/><rect x="398" y="226" width="16" height="12"/><rect x="432" y="226" width="16" height="12"/><rect x="466" y="226" width="16" height="12"/><rect x="500" y="226" width="16" height="12"/><rect x="534" y="226" width="16" height="12"/><rect x="568" y="226" width="16" height="12"/>
+        <rect x="670" y="226" width="16" height="12"/><rect x="704" y="226" width="16" height="12"/><rect x="738" y="226" width="16" height="12"/><rect x="772" y="226" width="16" height="12"/><rect x="806" y="226" width="16" height="12"/><rect x="840" y="226" width="16" height="12"/><rect x="874" y="226" width="16" height="12"/><rect x="908" y="226" width="16" height="12"/>
+        <rect class="win" x="124" y="154" width="8" height="18"/><rect class="win" x="296" y="154" width="8" height="18"/><rect class="win" x="636" y="120" width="8" height="22"/><rect class="win" x="976" y="154" width="8" height="18"/><rect class="win" x="1196" y="154" width="8" height="18"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ============ НАВИГАЦИЯ ============ -->
+  <header>
+    <nav class="nav" aria-label="Основная навигация">
+      <div class="container nav__inner">
+        <a href="#top" class="nav__logo" data-club>BUSINESS <span class="accent">SYNDICATE</span></a>
+        <div class="nav__links">
+          <a href="#who">О клубе</a>
+          <a href="#network">Связи</a>
+          <a href="#proof">Люди</a>
+          <a href="#founder">Рафаэль</a>
+          <a href="#circles">Круги</a>
+          <a href="#codex">Кодекс</a>
+        </div>
+        <a href="#apply" class="btn" style="padding:0.7em 1.5em;font-size:0.85rem">Подать заявку</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ════════════════════════════════════════════
+         ГЛАВА 1 · HERO — захват внимания
+    ════════════════════════════════════════════ -->
+    <section class="hero" aria-label="Главный экран">
+      <!-- слои глубины: фон → свет → частицы → виньетка → контент -->
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="hero__particles" aria-hidden="true"><canvas></canvas></div>
+      <div class="hero__vignette" aria-hidden="true"></div>
+
+      <div class="container hero__content">
+        <p class="kicker hero__kicker">Связи решают · <span data-city>Нижний Новгород</span></p>
+        <h1 class="hero__title">
+          <span data-word>BUSINESS</span> <span data-word class="accent">SYNDICATE</span>
+        </h1>
+        <p class="lead hero__lead">
+          Мастермайнд Рафаэля Салманова: 300 предпринимателей в одном зале.
+          Разборы бизнесов, живые связи и контакты, которые превращаются в контракты. Займи своё место.
+        </p>
+
+        <!-- Таймер + места -->
+        <div class="countdown-block mm-poster">
+          <div class="mm-poster__head">
+            <p class="mm-poster__label"><span class="mm-poster__pulse" aria-hidden="true"></span>Мастермайнд Рафаэля Салманова · перезапуск</p>
+            <p class="mm-poster__wordmark" aria-label="Мастермайнд">MASTER<em>MIND</em></p>
+            <p class="mm-poster__meta"><span data-mm-date>1 ноября</span><i>·</i>300 мест<i>·</i>один вечер, <span data-city>Нижний Новгород</span></p>
+          </div>
+          <p class="countdown-block__msg">До мастермайнда осталось…</p>
+          <div class="countdown" role="timer" aria-label="Обратный отсчёт до мастермайнда">
+            <div class="countdown__cell"><span class="countdown__num" data-unit="d">–</span><span class="countdown__label">дней</span></div>
+            <div class="countdown__cell"><span class="countdown__num" data-unit="h">–</span><span class="countdown__label">часов</span></div>
+            <div class="countdown__cell"><span class="countdown__num" data-unit="m">–</span><span class="countdown__label">минут</span></div>
+            <div class="countdown__cell"><span class="countdown__num" data-unit="s">–</span><span class="countdown__label">секунд</span></div>
+          </div>
+          <p class="countdown-block__bonus small"></p>
+          <div class="seats">
+            <div class="seats__row">
+              <span>Мест на мастермайнде</span>
+              <span>осталось <strong data-seats-left>–</strong> из <span data-seats-total>–</span></span>
+            </div>
+            <div class="seats__bar"><div class="seats__fill"></div></div>
+          </div>
+        </div>
+
+        <div class="hero__actions">
+          <a href="#apply" class="btn">Занять место</a>
+          <a href="#who" class="btn btn--ghost">Смотреть дальше</a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ✦ МАНИФЕСТ · слово навстречу -->
+    <section class="mm-watch" aria-label="Смотри, как это работает"><div class="container">
+      <p class="kicker">Смотри, как это работает</p>
+      <div class="mm-watch__frame"><video autoplay muted loop playsinline preload="metadata"></video>
+</div>
+    </div></section>
+
+    <section class="manifesto" aria-label="Связи решают">
+      <div>
+        <p class="manifesto__line">СВЯЗИ <span class="accent">РЕШАЮТ</span></p>
+        <p class="manifesto__sub">Ты летишь над городом, где каждый огонь — чей-то бизнес. Пора приземлиться в нужном кругу.</p>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         ГЛАВА 2 · КТО МЫ — движение и масштаб
+    ════════════════════════════════════════════ -->
+    <section class="chapter who" id="who" aria-label="О клубе">
+      <div class="container">
+        <p class="kicker">Глава 02 · Кто мы</p>
+        <h2 class="section__title">Сообщество предпринимателей,<br>улучшающих пространство вокруг</h2>
+        <p class="lead">Команда, которую знают в лицо. Здесь заходят друг к другу в бизнесы, помогают, делят доли. Вместе строим дорогу, по которой каждый идёт быстрее.</p>
+
+        <div class="who__grid">
+          <article class="card">
+            <p class="kicker">01</p>
+            <h3>Опыт из первых рук</h3>
+            <p class="small">Разборы реальных бизнесов, живые кейсы, ошибки и победы людей, которые уже прошли путь. Не теория — цифры и практика.</p>
+          </article>
+          <article class="card">
+            <p class="kicker">02</p>
+            <h3>Сплочённое комьюнити</h3>
+            <p class="small">Плотная сеть пересечений: знакомство одного открывает двери остальным. Контрагент, партнёр, инвестор — одним сообщением в клуб.</p>
+          </article>
+          <article class="card">
+            <p class="kicker">03</p>
+            <h3>Личный бренд и доход</h3>
+            <p class="small">Съёмки, интервью, медиа-упаковка. Участники клуба — заметные фигуры деловой среды города. Заметность конвертируется в деньги.</p>
+          </article>
+        </div>
+
+        <div class="who__stats">
+          <div class="stat"><span class="stat__number" data-value="15000">0</span><p class="stat__label">предпринимателей прошли через сообщество</p></div>
+          <div class="stat"><span class="stat__number" data-value="3500">0</span><p class="stat__label">активных резидентов в орбите</p></div>
+          <div class="stat"><span class="stat__number" data-value="10">0</span><p class="stat__label">бизнесов в портфеле основателя</p></div>
+          <div class="stat"><span class="stat__number" data-value="2015">0</span><p class="stat__label">год основания сообщества</p></div>
+        </div>
+      </div>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          Связи решают · Нетворкинг · Мастермайнд · Личный бренд · Медиа · Бизнес-разборы · Инвестиции · Партнёрства ·
+          Связи решают · Нетворкинг · Мастермайнд · Личный бренд · Медиа · Бизнес-разборы · Инвестиции · Партнёрства ·
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         ГЛАВА 3 · ПОЧЕМУ СВЯЗИ РЕШАЮТ — метафора сети
+    ════════════════════════════════════════════ -->
+    <section class="chapter network" id="network" aria-label="Почему связи решают">
+      <div class="container">
+        <p class="kicker">Глава 03 · Механика</p>
+        <h2 class="section__title">Связи решают. Проверь сам</h2>
+        <p class="lead">Каждая точка — предприниматель. Каждая линия — сделка, рекомендация, партнёрство. Эту сеть я собираю с 2015 года. Дотронься до неё — увидишь, как один человек будит весь круг. Кликни — узнаешь, что рождается из связей.</p>
+
+        <div class="network__canvas-wrap" data-cursor="кликни">
+          <canvas aria-hidden="true"></canvas>
+          <p class="network__caption" aria-live="polite"></p>
+          <p class="network__hint" aria-hidden="true">кликни по сети</p>
+        </div>
+
+        <p class="network__phrase">
+          3 500 предпринимателей × 10 контактов =
+          <span class="accent">35 000 тёплых связей</span>, которые работают на каждого.
+        </p>
+      </div>
+    </section>
+
+    <!-- ✦ МАНИФЕСТ · слово навстречу -->
+    <section class="manifesto" aria-label="Один звонок меняет всё">
+      <div>
+        <p class="manifesto__line">ОДИН ЗВОНОК<br><span class="accent">МЕНЯЕТ ВСЁ</span></p>
+        <p class="manifesto__sub">Нужный контакт находится за часы, а не за годы. Так работает наш круг.</p>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         ГЛАВА 4 · ДОКАЗАТЕЛЬСТВА — люди и результаты
+    ════════════════════════════════════════════ -->
+    <section class="chapter proof" id="proof" aria-label="Отзывы и лица клуба">
+      <div class="container">
+        <p class="kicker">Глава 04 · Люди</p>
+        <h2 class="section__title">Они уже внутри</h2>
+        <p class="lead">Предприниматели клуба — о том, что им дало сообщество. Живые лица и реальные результаты.</p>
+
+        <!-- Видеоотзывы: data-video="ссылка на embed" (VK Видео / YouTube) -->
+        <div class="videos">
+          <!-- data-video-local — mp4 из assets/video; data-video — embed (VK/YouTube) для продакшна -->
+          <article class="video-card" data-cursor="смотреть" data-video-local="../../assets/video/review-rogozin.mp4">
+            <div class="video-card__thumb"><img data-src="../../assets/images/review-rogozin.webp" alt="Видеоотзыв: Артём Рогозин" width="800" height="450" style="width:100%;height:100%;object-fit:cover"></div>
+            <div class="video-card__info"><b>Артём Рогозин</b><span>Центральная Похоронная служба</span></div>
+          </article>
+          <article class="video-card" data-cursor="смотреть" data-video-local="../../assets/video/review-tony.mp4" data-broken>
+            <span class="video-card__broken">(не открывается, починить)</span>
+            <div class="video-card__thumb"><img data-src="../../assets/images/review-tony.webp" alt="Видеоотзыв: Tony Cars" width="800" height="450" style="width:100%;height:100%;object-fit:cover"></div>
+            <div class="video-card__info"><b>Антон Коновалов</b><span>TonyCars</span></div>
+          </article>
+          <article class="video-card" data-cursor="смотреть" data-video-local="../../assets/video/review-leonova.mp4" data-broken>
+            <span class="video-card__broken">(не открывается, починить)</span>
+            <div class="video-card__thumb"><img data-src="../../assets/images/review-leonova.webp" alt="Видеоотзыв: Ксюша Леонова" width="800" height="450" style="width:100%;height:100%;object-fit:cover"></div>
+            <div class="video-card__info"><b>Ксюша Леонова</b><span>Раска</span></div>
+          </article>
+          <article class="video-card" data-cursor="смотреть" data-video-local="../../assets/video/review-roma.mp4">
+            <div class="video-card__thumb"><img data-src="../../assets/images/review-roma.webp" alt="Видеоотзыв: Рома База" width="800" height="450" style="width:100%;height:100%;object-fit:cover"></div>
+            <div class="video-card__info"><b>Рома База</b><span>Бар «Связи»</span></div>
+          </article>
+          <article class="video-card" data-cursor="смотреть" data-video-local="../../assets/video/review-silanteva.mp4" data-broken>
+            <span class="video-card__broken">(не открывается, починить)</span>
+            <div class="video-card__thumb"><img data-src="../../assets/images/review-silanteva.webp" alt="Видеоотзыв: Анна Силантьева" width="800" height="450" style="width:100%;height:100%;object-fit:cover"></div>
+            <div class="video-card__info"><b>Анна Силантьева</b><span>Спа-Химчистка</span></div>
+          </article>
+          <article class="video-card" data-cursor="смотреть" data-video-local="../../assets/video/review-permitin.mp4" data-broken>
+            <span class="video-card__broken">(не открывается, починить)</span>
+            <div class="video-card__thumb"><img data-src="../../assets/images/review-permitin.webp" alt="Видеоотзыв: Илья Пермитин" width="800" height="450" style="width:100%;height:100%;object-fit:cover"></div>
+            <div class="video-card__info"><b>Илья Пермитин</b><span>CRM и AI-автоматизация</span></div>
+          </article>
+          <article class="video-card" data-cursor="смотреть" data-video-local="../../assets/video/review-kormushonkov.mp4">
+            <div class="video-card__thumb"><img data-src="../../assets/images/review-kormushonkov.webp" alt="Видеоотзыв: Кирилл Кормушонков" width="800" height="450" style="width:100%;height:100%;object-fit:cover"></div>
+            <div class="video-card__info"><b>Кирилл Кормушонков</b><span>Тату-студия</span></div>
+          </article>
+        </div>
+
+        <!-- ДОСКА ДЕТЕКТИВА: досье участников, нити ведут к Рафаэлю.
+             Фото вставляются в .dossier__photo как <img>. -->
+        <h3 style="margin-top:var(--space-xl);font-size:1.4rem">Дело № 2026 · Зал славы</h3>
+        <p class="small" style="margin-top:0.4rem">Тащи по коридору — карточки участников едут по красным лентам к одному человеку. Наведи — карточка поворачивается к тебе, кликни — раскроется суть, «Открыть досье» покажет всю историю.</p>
+        <div class="hall" id="hall">
+          <svg class="hall__rails" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="hallRail" gradientUnits="userSpaceOnUse" x1="0" y1="600" x2="0" y2="264">
+                <stop offset="0" stop-color="rgba(250,30,50,0.04)"/>
+                <stop offset="0.2" stop-color="rgba(250,30,50,0.9)"/>
+                <stop offset="1" stop-color="rgba(250,70,80,0.18)"/>
+              </linearGradient>
+            </defs>
+            <polygon points="-40,610 64,610 502,266 498,266" fill="url(#hallRail)"/>
+            <polygon points="1040,610 936,610 498,266 502,266" fill="url(#hallRail)"/>
+          </svg>
+
+          <div class="hall__stage">
+            <div class="hof-card" role="button" tabindex="0" data-dossier="rogozin" aria-label="Досье: Артём Рогозин" style="--x:-300px;--y:-14px;--z:-300px;--ry:32deg">
+              <div class="hof-card__inner">
+                <div class="hof-card__face hof-card__front">
+                  <div class="hof-card__photo"><img src="../../assets/images/p-rogozin.webp" alt="" loading="lazy"></div>
+                  <div class="hof-card__cap"><b>Артём Рогозин</b><span>ЦПС</span></div>
+                </div>
+                <div class="hof-card__face hof-card__back">
+                  <span class="hof-card__kick">Дело № 2026</span>
+                  <p class="hof-card__essence">Надёжнейший человек круга — даёт раньше, чем просит.</p>
+                  <button class="hof-card__open" type="button">Открыть досье →</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="hof-card" role="button" tabindex="0" data-dossier="roma" aria-label="Досье: Рома База" style="--x:300px;--y:10px;--z:-560px;--ry:-32deg">
+              <div class="hof-card__inner">
+                <div class="hof-card__face hof-card__front">
+                  <div class="hof-card__photo"><img src="../../assets/images/p-roma.webp" alt="" loading="lazy"></div>
+                  <div class="hof-card__cap"><b>Рома База</b><span>Бар «Связи»</span></div>
+                </div>
+                <div class="hof-card__face hof-card__back">
+                  <span class="hof-card__kick">Дело № 2026</span>
+                  <p class="hof-card__essence">Его бар — точка сборки клуба. Связи рождаются за стойкой.</p>
+                  <button class="hof-card__open" type="button">Открыть досье →</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="hof-card" role="button" tabindex="0" data-dossier="leonova" aria-label="Досье: Ксюша Леонова" style="--x:-320px;--y:8px;--z:-860px;--ry:32deg">
+              <div class="hof-card__inner">
+                <div class="hof-card__face hof-card__front">
+                  <div class="hof-card__photo"><img src="../../assets/images/p-leonova.webp" alt="" loading="lazy"></div>
+                  <div class="hof-card__cap"><b>Ксюша Леонова</b><span>Раска</span></div>
+                </div>
+                <div class="hof-card__face hof-card__back">
+                  <span class="hof-card__kick">Дело № 2026</span>
+                  <p class="hof-card__essence">Женская предпринимательская сила круга.</p>
+                  <button class="hof-card__open" type="button">Открыть досье →</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="hof-card" role="button" tabindex="0" data-dossier="tony" aria-label="Досье: Антон Коновалов" style="--x:320px;--y:-12px;--z:-1160px;--ry:-32deg">
+              <div class="hof-card__inner">
+                <div class="hof-card__face hof-card__front">
+                  <div class="hof-card__photo"><img src="../../assets/images/p-tony.webp" alt="" loading="lazy"></div>
+                  <div class="hof-card__cap"><b>Антон Коновалов</b><span>TonyCars</span></div>
+                </div>
+                <div class="hof-card__face hof-card__back">
+                  <span class="hof-card__kick">Дело № 2026</span>
+                  <p class="hof-card__essence">Клиенты и партнёры — из круга, быстрее любой рекламы.</p>
+                  <button class="hof-card__open" type="button">Открыть досье →</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="hof-card" role="button" tabindex="0" data-dossier="silanteva" aria-label="Досье: Анна Силантьева" style="--x:-320px;--y:12px;--z:-1500px;--ry:32deg">
+              <div class="hof-card__inner">
+                <div class="hof-card__face hof-card__front">
+                  <div class="hof-card__photo"><img src="../../assets/images/p-selezneva.webp" alt="" loading="lazy"></div>
+                  <div class="hof-card__cap"><b>Анна Силантьева</b><span>Спа-Химчистка</span></div>
+                </div>
+                <div class="hof-card__face hof-card__back">
+                  <span class="hof-card__kick">Дело № 2026</span>
+                  <p class="hof-card__essence">Сервис, о котором говорят. Растёт на связях клуба.</p>
+                  <button class="hof-card__open" type="button">Открыть досье →</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="hof-card" role="button" tabindex="0" data-dossier="permitin" aria-label="Досье: Илья Пермитин" style="--x:320px;--y:-8px;--z:-1840px;--ry:-32deg">
+              <div class="hof-card__inner">
+                <div class="hof-card__face hof-card__front">
+                  <div class="hof-card__ph-empty">И</div>
+                  <div class="hof-card__cap"><b>Илья Пермитин</b><span>CRM и AI</span></div>
+                </div>
+                <div class="hof-card__face hof-card__back">
+                  <span class="hof-card__kick">Дело № 2026</span>
+                  <p class="hof-card__essence">Автоматизация для роста. Резиденты клуба — его клиенты.</p>
+                  <button class="hof-card__open" type="button">Открыть досье →</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="hof-card" role="button" tabindex="0" data-dossier="kormushonkov" aria-label="Досье: Кирилл Кормушонков" style="--x:-320px;--y:10px;--z:-2200px;--ry:32deg">
+              <div class="hof-card__inner">
+                <div class="hof-card__face hof-card__front">
+                  <div class="hof-card__photo"><img src="../../assets/images/p-kormushonkov.webp" alt="" loading="lazy"></div>
+                  <div class="hof-card__cap"><b>Кирилл Кормушонков</b><span>Тату-студия</span></div>
+                </div>
+                <div class="hof-card__face hof-card__back">
+                  <span class="hof-card__kick">Дело № 2026</span>
+                  <p class="hof-card__essence">Медийность и клиенты через клуб. Его лицо знают.</p>
+                  <button class="hof-card__open" type="button">Открыть досье →</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="hof-card" role="button" tabindex="0" data-dossier="bubnov" aria-label="Досье: Александр Бубнов" style="--x:320px;--y:-10px;--z:-2560px;--ry:-32deg">
+              <div class="hof-card__inner">
+                <div class="hof-card__face hof-card__front">
+                  <div class="hof-card__photo"><img src="../../assets/images/p-bubnov.webp" alt="" loading="lazy"></div>
+                  <div class="hof-card__cap"><b>Александр Бубнов</b><span>CleanBiz</span></div>
+                </div>
+                <div class="hof-card__face hof-card__back">
+                  <span class="hof-card__kick">Дело № 2026</span>
+                  <p class="hof-card__essence">B2B-контракты из круга: бизнесы доверяют своим.</p>
+                  <button class="hof-card__open" type="button">Открыть досье →</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="hof-card hof-card--you" role="button" tabindex="0" data-dossier="you" aria-label="Досье: здесь можешь быть ты" style="--x:0px;--y:-20px;--z:-2960px;--ry:0deg">
+              <div class="hof-card__inner">
+                <div class="hof-card__face hof-card__front">
+                  <div class="hof-card__ph-empty">?</div>
+                  <div class="hof-card__cap"><b>Здесь можешь быть ты!</b><span>Дело не закрыто</span></div>
+                </div>
+                <div class="hof-card__face hof-card__back">
+                  <span class="hof-card__kick">Дело № 2026</span>
+                  <p class="hof-card__essence">Заявка → просев по кодексу → первый мастермайнд. Твоя карточка появится здесь.</p>
+                  <button class="hof-card__open" type="button">Подать заявку →</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="hall__rafael" role="button" tabindex="0" data-dossier="rafael" aria-label="Досье: Рафаэль Салманов" style="--rz:-3520px">
+              <div class="hall__rafael-photo"><img src="../../assets/images/p-rafael.webp" alt="" loading="lazy"></div>
+              <div class="hall__rafael-label">BUSINESS SYNDICATE</div>
+              <div class="hall__rafael-role">Рафаэль Салманов · центр сети</div>
+            </div>
+          </div>
+
+          <div class="hall__haze"></div>
+          <div class="hall__vign"></div>
+          <p class="hall__hint">Листай вниз — зал едет к тебе. В конце страница пойдёт дальше.</p>
+        </div>
+
+        <!-- Галерея мероприятий: <img data-src="../../..."> для реальных фото -->
+        <div class="gallery" role="list" aria-label="Галерея мероприятий">
+          <figure class="gallery__item" data-cursor="смотреть" role="listitem"><img data-src="../../assets/images/mm-group.webp" alt="Общее фото мастермайнда"><figcaption>Мастермайнд Business Syndicate · общее фото</figcaption></figure>
+          <figure class="gallery__item" data-cursor="смотреть" role="listitem"><figcaption>Бизнес-завтрак клуба</figcaption></figure>
+          <figure class="gallery__item" data-cursor="смотреть" role="listitem"><figcaption>Съёмки интервью</figcaption></figure>
+          <figure class="gallery__item" data-cursor="смотреть" role="listitem"><figcaption>Нетворкинг</figcaption></figure>
+          <figure class="gallery__item" data-cursor="смотреть" role="listitem"><figcaption>Разбор на сцене</figcaption></figure>
+          <figure class="gallery__item" data-cursor="смотреть" role="listitem"><figcaption>Афтепати</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         ГЛАВА 5 · РАФАЭЛЬ — лидер экосистемы
+    ════════════════════════════════════════════ -->
+    <section class="chapter founder" id="founder" aria-label="Основатель">
+      <div class="container">
+        <div class="founder__grid">
+          <div class="founder__portrait"><img src="../../assets/images/rafael-portrait.webp" alt="Рафаэль Салманов" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div class="founder__text">
+            <p class="kicker">Глава 05 · Лидер</p>
+            <h2 class="section__title">Рафаэль Салманов</h2>
+            <p class="lead">Предприниматель, инвестор, основатель крупнейшего бизнес-сообщества Нижнего Новгорода. С 2015 года строит бизнес-экосистему региона.</p>
+            <blockquote>«Связи решают. Я объединяю людей, помогаю им расти и доказываю: путь от работяги до предпринимателя-инвестора реален для каждого».</blockquote>
+            <div class="founder__facts">
+              <div class="card"><span class="stat__number" style="font-size:1.6rem">10</span><p class="small">бизнесов в портфеле: финтех, производство, digital</p></div>
+              <div class="card"><span class="stat__number" style="font-size:1.6rem">45 млн ₽</span><p class="small">инвестиций в проекты резидентов за 2025 год</p></div>
+              <div class="card"><span class="stat__number" style="font-size:1.6rem">100</span><p class="small">бизнесов — цель экосистемы и управляющей компании</p></div>
+              <div class="card"><span class="stat__number" style="font-size:1.6rem">76</span><p class="small">стран — география экспорта одного из проектов</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ✦ МАНИФЕСТ · слово навстречу -->
+    <section class="manifesto" aria-label="Путь реален для каждого">
+      <div>
+        <p class="manifesto__line">ПУТЬ РЕАЛЕН<br><span class="accent">ДЛЯ КАЖДОГО</span></p>
+        <p class="manifesto__sub">От работяги до предпринимателя-инвестора. Доказано теми, кто уже внутри.</p>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         ГЛАВА 6 · КРУГИ — уровни вовлечённости
+    ════════════════════════════════════════════ -->
+    <section class="chapter circles" id="circles" aria-label="Круги и тарифы">
+      <div class="container">
+        <p class="kicker">Глава 06 · Круги</p>
+        <h2 class="section__title">Выбери свою глубину</h2>
+        <p class="lead">Подписка помесячно. Чем ближе к ядру — тем плотнее связи и тем быстрее рост. Вход в любой круг — по соответствию.</p>
+
+        <div class="tariffs">
+          <!-- Круг I -->
+          <article class="card tariff" data-cursor="открыть" data-tariff="resident" tabindex="0" aria-label="Круг Резидент, подробнее">
+            <span class="tariff__circle">Круг I · Инструменты</span>
+            <h3 class="tariff__name">РЕЗИДЕНТ</h3>
+            <p class="tariff__price">10 000 ₽<span> / месяц</span></p>
+            <ul class="tariff__list">
+              <li>Ежемесячный мастермайнд (200–300 участников)</li>
+              <li>Закрытый Telegram-клуб: запросы, контрагенты, предложения</li>
+              <li>Бизнес-завтраки раз в месяц</li>
+              <li>Каталог предпринимателей — тебя находят</li>
+              <li>Гостевой билет для партнёра — раз в квартал</li>
+              <li>Афтепати и неформальные встречи</li>
+            </ul>
+            <a href="#apply" class="btn btn--ghost">Вступить</a>
+            <p class="tariff__hint">Нажми на карточку — полная расшифровка</p>
+          </article>
+
+          <!-- Круг II -->
+          <article class="card tariff tariff--feature" data-cursor="открыть" data-tariff="media" tabindex="0" aria-label="Круг Медиа, подробнее">
+            <span class="tariff__badge">Оптимальный</span>
+            <span class="tariff__circle">Круг II · Медиа</span>
+            <h3 class="tariff__name">МЕДИА</h3>
+            <p class="tariff__price">30 000 ₽<span> / месяц</span></p>
+            <ul class="tariff__list">
+              <li class="plus">Всё из круга «Резидент», плюс:</li>
+              <li>Личный бизнес-разбор экспертами клуба</li>
+              <li>Медиа-упаковка: статья о тебе + SEO-продвижение</li>
+              <li>Питч со сцены: представь проект залу</li>
+              <li>Фотосессия на мероприятиях клуба</li>
+              <li>Адресный нетворкинг и рекомендация клуба</li>
+              <li>Скидки на услуги резидентов</li>
+            </ul>
+            <a href="#apply" class="btn">Вступить</a>
+            <p class="tariff__hint">Нажми на карточку — полная расшифровка</p>
+          </article>
+
+          <!-- Круг III -->
+          <article class="card tariff" data-cursor="открыть" data-tariff="vip" tabindex="0" aria-label="Круг VIP, подробнее">
+            <span class="tariff__circle">Круг III · Близкий круг</span>
+            <h3 class="tariff__name">VIP</h3>
+            <p class="tariff__price">50 000 ₽<span> / месяц</span></p>
+            <ul class="tariff__list">
+              <li class="plus">Всё из кругов «Резидент» и «Медиа», плюс:</li>
+              <li>Близкий круг 20–30 человек с прямым доступом к Рафаэлю</li>
+              <li>Съёмки на мероприятиях + интервью в медиа-канале</li>
+              <li>Контент-завод zvd.news — ты в повестке постоянно</li>
+              <li>Публикации в СМИ и интеграция бренда</li>
+              <li>«Сериал» клуба — главные лица деловой среды</li>
+              <li>Первый доступ к проектам и долям экосистемы</li>
+              <li>Выездные встречи: спорт, рыбалка, закрытые ужины</li>
+            </ul>
+            <a href="#apply" class="btn btn--ghost">Пройти отбор</a>
+            <p class="tariff__hint">Нажми на карточку — полная расшифровка</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ КОДЕКС ════════════ -->
+    <section class="chapter codex" id="codex" aria-label="Кодекс клуба">
+      <div class="container">
+        <p class="kicker">Кодекс</p>
+        <h2 class="section__title">Пакт, который подписывает каждый</h2>
+        <p class="lead">Люди приходят сюда улучшать свою жизнь и пространство вокруг. Кодекс держит уровень круга.</p>
+
+        <div class="codex__list">
+          <div class="rule"><span class="rule__num">01</span><div class="rule__body"><b>Вход по соответствию</b><p>Кандидат проходит просев по делу, виду и адекватности. Место в кругу зарабатывается.</p></div></div>
+          <div class="rule"><span class="rule__num">02</span><div class="rule__body"><b>Каждый — заметная фигура</b><p>У участника есть проект и опрятная подача. Витрина не терпит серых профилей.</p></div></div>
+          <div class="rule"><span class="rule__num">03</span><div class="rule__body"><b>Давай раньше, чем просишь</b><p>Связь, рекомендация, помощь по проекту — первичны. Берёт тот, кто отдаёт.</p></div></div>
+          <div class="rule"><span class="rule__num">04</span><div class="rule__body"><b>Честь и слово</b><p>Договорился — сделал. Без ветрености, интриг и странных схем. Репутация дороже сделки.</p></div></div>
+          <div class="rule"><span class="rule__num">05</span><div class="rule__body"><b>Без токсичности и нытья</b><p>Мы пришли строить. Живые лица и лёгкий лайфстайл — стандарт поведения.</p></div></div>
+          <div class="rule"><span class="rule__num">06</span><div class="rule__body"><b>Конфиденциальность круга</b><p>Что внутри — остаётся внутри. Контакты не сливаются наружу без согласия.</p></div></div>
+          <div class="rule"><span class="rule__num">07</span><div class="rule__body"><b>Пост-релиз обязателен</b><p>2–3 единицы контента после каждого мероприятия. Событие продолжает жить в ленте.</p></div></div>
+          <div class="rule"><span class="rule__num">08</span><div class="rule__body"><b>Репутация — общая</b><p>Клуб — публичное пространство: поступок каждого отражается на имени всех. Бережём репутацию круга как свою.</p></div></div>
+        </div>
+        <p class="small" style="margin-top:1.6rem;max-width:820px">Пакт подписывается осознанно. Взнос не возвращается: все условия — на берегу, честно и открыто. Нарушение кодекса — выход из круга.</p>
+      </div>
+    </section>
+
+    <!-- ════════════ ПУТЬ УЧАСТНИКА ════════════ -->
+    <section class="chapter path" id="path" aria-label="Путь участника">
+      <div class="container">
+        <p class="kicker">Твой путь</p>
+        <h2 class="section__title">Что тебя ждёт после вступления</h2>
+
+        <div class="path__track">
+          <div class="path__step"><article class="card path__card"><span class="path__stage">Шаг 1 · Вход</span><h3>Первый мастермайнд</h3><p>Приходишь на встречу, знакомишься с кругом, получаешь доступ в закрытый клуб.</p></article><aside class="path__extra"><p><b>Как это выглядит:</b> 300 предпринимателей, работа в группах по нишам, карта участников в руках. За вечер — 15–20 живых знакомств. Доступ в закрытый клуб — в тот же день.</p></aside></div>
+          <div class="path__step"><article class="card path__card"><span class="path__stage">Шаг 2 · Связи</span><h3>Первые пересечения</h3><p>Клуб решает твои запросы: контрагенты, подрядчики, клиенты.</p></article><aside class="path__extra"><p><b>Механика:</b> пишешь запрос в закрытый чат — «нужен подрядчик» — и получаешь проверенные контакты за часы. Круг отвечает, потому что каждый здесь даёт раньше, чем просит.</p></aside></div>
+          <div class="path__step"><article class="card path__card"><span class="path__stage">Шаг 3 · Разбор</span><h3>Бизнес-разбор</h3><p>Твой бизнес разбирают эксперты клуба. Находим точки роста.</p></article><aside class="path__extra"><p><b>Формат:</b> 40 минут твой бизнес на столе у экспертов. Цифры, узкие места, точки роста. Уходишь с планом действий, а круг узнаёт, чем тебе помогать.</p></aside></div>
+          <div class="path__step"><article class="card path__card"><span class="path__stage">Шаг 4 · Медиа</span><h3>Личный бренд</h3><p>Съёмки, интервью, упаковка. Заметность приносит клиентов.</p></article><aside class="path__extra"><p><b>Что делаем:</b> съёмки на мероприятиях, интервью, статья о тебе с SEO-продвижением. Тебя начинают узнавать — и клиенты приходят сами, по имени.</p></aside></div>
+          <div class="path__step"><article class="card path__card"><span class="path__stage">Шаг 5 · Ядро</span><h3>Близкий круг</h3><p>Лучшие проходят дальше: стратегия с Рафаэлем, доступ к проектам, доли.</p></article><aside class="path__extra"><p><b>Уровень VIP:</b> 20–30 человек, стратегические сессии с Рафаэлем, контент-завод zvd.news, выездные встречи. Здесь обсуждаются проекты и доли.</p></aside></div>
+          <div class="path__step"><article class="card path__card"><span class="path__stage">Шаг 6 · Масштаб</span><h3>Экосистема 100 бизнесов</h3><p>Управляющая компания и академия. Ты — совладелец движения.</p></article><aside class="path__extra"><p><b>Горизонт:</b> управляющая компания на сотню бизнесов и академия. Ядро клуба заходит в проекты первым — деньгами, компетенциями или ресурсом.</p></aside></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ✦ МАНИФЕСТ · слово навстречу -->
+    <section class="manifesto" aria-label="Твоё место ждёт">
+      <div>
+        <p class="manifesto__line">ТВОЁ МЕСТО <span class="accent">ЖДЁТ</span></p>
+        <p class="manifesto__sub">300 кресел в одном зале. Одно из них — твоё.</p>
+      </div>
+    </section>
+
+    <!-- ════════════ ЛОКАЦИЯ ════════════ -->
+    <section class="chapter location" aria-label="Место проведения">
+      <div class="container">
+        <p class="kicker">Локация</p>
+        <h2 class="section__title">Где встречаемся</h2>
+        <p class="lead" data-place>Площадка уточняется · Нижний Новгород</p>
+
+        <div class="location__map" id="ymap" role="img" aria-label="Карта: Hampton by Hilton, Нижний Новгород"></div>
+      </div>
+    </section>
+
+    <!-- ════════════ ПОСАДКА · КРЕМЛЬ ════════════ -->
+    <section class="landing" aria-label="Приземление">
+      <p class="kicker landing__kicker">Приземление · <span data-city>Нижний Новгород</span></p>
+      <h2 class="landing__title">Ты на земле.<br>Теперь — <span class="accent">в круг.</span></h2>
+      <p class="landing__sub">Полёт окончен там, где всё началось — под стенами кремля. Дальше уже не мечта, а действие.</p>
+      <a href="#apply" class="btn">Занять место</a>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         ГЛАВА 7 · ФИНАЛ — эмоциональный CTA
+    ════════════════════════════════════════════ -->
+    <section class="chapter final" id="apply" aria-label="Заявка">
+      <div class="container">
+        <p class="kicker">Глава 07 · Твой ход</p>
+        <h2 class="final__title">Сильное окружение<br>не появляется само.<br><span class="accent">Его выбирают.</span></h2>
+        <p class="lead" style="margin-top:2rem">Заполни заявку — команда клуба свяжется с тобой в течение дня.</p>
+
+        <form class="form" novalidate>
+          <div class="form__fields">
+            <div class="field">
+              <label class="small" for="f-name">Имя и фамилия</label>
+              <input id="f-name" type="text" name="name" autocomplete="name" required>
+              <span class="field__error"></span>
+            </div>
+            <div class="field">
+              <label class="small" for="f-phone">Телефон</label>
+              <input id="f-phone" type="tel" name="phone" autocomplete="tel" required>
+              <span class="field__error"></span>
+            </div>
+            <div class="field">
+              <label class="small" for="f-tg">Telegram @ник</label>
+              <input id="f-tg" type="text" name="tg">
+              <span class="field__error"></span>
+            </div>
+            <div class="field">
+              <label class="small" for="f-biz">Твой бизнес / проект</label>
+              <input id="f-biz" type="text" name="biz" required>
+              <span class="field__error"></span>
+            </div>
+            <div class="field">
+              <label class="small" for="f-tariff">Какой круг интересен</label>
+              <select id="f-tariff" name="tariff" required>
+                <option value="" disabled selected>Выбери круг</option>
+                <option>Резидент — 10 000 ₽/мес</option>
+                <option>Медиа — 30 000 ₽/мес</option>
+                <option>VIP — 50 000 ₽/мес</option>
+                <option>Пока не знаю — расскажите</option>
+              </select>
+              <span class="field__error"></span>
+            </div>
+            <label class="form__consent">
+              <input type="checkbox" required>
+              <span>Принимаю <a href="#codex" style="text-decoration:underline">Кодекс клуба</a> и согласен(-на) на обработку персональных данных</span>
+            </label>
+            <button type="submit" class="btn">Отправить заявку</button>
+          </div>
+
+          <div class="form__success" role="status">
+            <div class="check-icon">✓</div>
+            <h3>Заявка ушла</h3>
+            <p class="small" style="margin-top:0.5rem">Команда клуба свяжется с тобой в течение дня. Добро пожаловать в движение.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ ОБЩЕЕ ФОТО МАСТЕРМАЙНДА ============ -->
+  <section class="mm-photo" aria-label="Общее фото мастермайнда">
+    <img data-src="../../assets/images/mm-group.webp" alt="Участники мастермайнда Business Syndicate" class="mm-photo__img">
+    <div class="mm-photo__vignette" aria-hidden="true"></div>
+    <div class="mm-photo__content">
+      <p class="kicker" style="justify-content:center">Мастермайнд · <span data-city>Нижний Новгород</span></p>
+      <h2 class="mm-photo__title">ОСТАЮТСЯ <span class="accent">СИЛЬНЕЙШИЕ</span></h2>
+      <p class="mm-photo__sub">Эти люди уже сделали свой ход. Следующее фото — с тобой.</p>
+      <a href="#apply" class="btn" style="margin-top:1.6rem">Занять место</a>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cols">
+        <div>
+          <p class="nav__logo" data-club style="margin-bottom:0.6rem">BUSINESS <span class="accent">SYNDICATE</span></p>
+          <p data-slogan>Сообщество предпринимателей, улучшающих пространство вокруг.</p>
+          <p style="margin-top:0.4rem" data-city>Нижний Новгород</p>
+        </div>
+        <div>
+          <b style="color:var(--c-text)">Клуб</b>
+          <ul style="margin-top:0.8rem">
+            <li><a href="#who">О клубе</a></li>
+            <li><a href="#circles">Круги и тарифы</a></li>
+            <li><a href="#codex">Кодекс</a></li>
+            <li><a href="#apply">Заявка</a></li>
+          </ul>
+        </div>
+        <div>
+          <b style="color:var(--c-text)">Связь</b>
+          <ul style="margin-top:0.8rem">
+            <li><a href="https://t.me/SALMANOVRS" target="_blank" rel="noopener">Telegram Рафаэля</a></li>
+            <li><a href="https://r.salmanov.one" target="_blank" rel="noopener">r.salmanov.one</a></li>
+            <!-- SLOT: тг-канал клуба, VK, почта — после утверждения ссылок -->
+          </ul>
+        </div>
+      </div>
+      <p>© <span data-club-text>Business Syndicate</span> 2015–2026 · Все права защищены</p>
+    </div>
+  </footer>
+
+  <!-- ============ МОДАЛКА (тарифы + досье) ============ -->
+  <div class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal">
+      <button class="modal__close" aria-label="Закрыть">×</button>
+      <div class="modal__content"></div>
+    </div>
+  </div>
+
+  <!-- ============ ЛАЙТБОКС ГАЛЕРЕИ ============ -->
+  <div class="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox__frame"></div>
+    <p class="lightbox__caption"></p>
+    <div class="lightbox__nav">
+      <button data-lb-prev aria-label="Предыдущее фото">←</button>
+      <button data-lb-close aria-label="Закрыть">✕</button>
+      <button data-lb-next aria-label="Следующее фото">→</button>
+    </div>
+  </div>
+
+  <!-- ============ Скрипты (порядок важен) ============ -->
+  <script src="../_v1/js/config.js?v=11" defer></script>
+  <script src="../_v1/js/app.js?v=11" defer></script>
+  <script src="../_v1/js/sky.js?v=11" defer></script>
+  <script src="../_v1/js/smoothScroll.js?v=11" defer></script>
+  <script src="../_v1/js/cursor.js?v=11" defer></script>
+  <script src="../_v1/js/kinetic.js?v=11" defer></script>
+  <script src="../_v1/js/particles.js?v=11" defer></script>
+  <script src="../_v1/js/network.js?v=11" defer></script>
+  <script src="../_v1/js/hero.js?v=11" defer></script>
+  <script src="../_v1/js/animations.js?v=11" defer></script>
+  <script src="../_v1/js/countdown.js?v=11" defer></script>
+  <script src="../_v1/js/tilt.js?v=11" defer></script>
+  <script src="../_v1/js/modal.js?v=11" defer></script>
+  <script src="../_v1/js/form.js?v=11" defer></script>
+  <script src="../_v1/js/gallery.js?v=11" defer></script>
+  <script src="../_v1/js/hall.js?v=11" defer></script>
+  <script src="../_v1/js/reel.js?v=11" defer></script>
+  <script src="https://api-maps.yandex.ru/v3/?apikey=fc81e528-f99f-4381-9476-6a5e85a68f4a&lang=ru_RU" defer></script>
+  <script src="../_v1/js/map.js?v=11" defer></script>
+  <script src="../_v1/js/lazyload.js?v=11" defer></script>
+
+  <!-- SLOT: Яндекс.Метрика / VK-пиксель — вставить счётчики при деплое -->
+
+<script id="mm-bg-js">
+(function () {
+  "use strict";
+  var V = "../../assets/video/mastermind/";
+  var mob = matchMedia("(max-aspect-ratio: 1/1)").matches, big = matchMedia("(min-width: 1400px)").matches;
+  var calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* WebM (VP9) легче — для Chrome/Android/Firefox; MP4 (H.264) — для Safari/iOS */
+  var webm = document.createElement("video").canPlayType('video/webm; codecs="vp9"') ? ".webm" : ".mp4";
+  function file() { return V + (mob ? "mastermind-bg-mobile-9x16" : big ? "mastermind-bg-1080p" : "mastermind-bg-720p") + webm; }
+  function poster() { return V + (mob ? "mastermind-bg-poster-mobile.jpg" : "mastermind-bg-poster.jpg"); }
+  /* последние ~0.15 с ролик уходит в чёрный — перескакиваем раньше, чтобы цикл не мигал */
+  function seamless(v) { v.addEventListener("timeupdate", function () { if (v.duration && v.currentTime > v.duration - 0.2) v.currentTime = 0; }); }
+  document.querySelectorAll(".mm-bg, .mm-watch__frame").forEach(function (box) {
+    box.style.backgroundImage = "url(" + poster() + ")";
+  });
+  document.querySelectorAll(".mm-bg video, .mm-watch__frame video").forEach(function (v) {
+    v.poster = poster();
+    if (calm) return;
+    v.src = file(); seamless(v);
+    /* нет горизонтального файла — берём вертикальный (обрежется по центру), чтобы не стоял постер */
+    v.addEventListener("error", function () {
+      if (v.dataset.reel) return;           /* ошибка ролика со звуком — фон не подменяем */
+      var alt = V + "mastermind-bg-mobile-9x16" + webm;
+      if (v.src.indexOf("mobile") === -1) { v.src = alt; var q = v.play(); if (q && q.catch) q.catch(function () {}); }
+    });
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+  });
+})();
+</script>
+</body>
+</html>

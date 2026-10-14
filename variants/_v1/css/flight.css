@@ -1,0 +1,559 @@
+/* ============================================================
+   flight.css — «полёт сквозь ночной Нижний».
+   Подключается ПОСЛЕ upgrade.css. Ночное небо-фон (.sky),
+   perspective-хореография полёта, манифест-интерстишлы,
+   дисплейный шрифт Unbounded, сцена посадки у кремля.
+============================================================ */
+
+/* ------------------------------------------------------------
+   0 · ДИСПЛЕЙНЫЙ ШРИФТ — смелый кино-гротеск на титрах
+------------------------------------------------------------ */
+.hero__title,
+.section__title,
+.final__title,
+.mm-poster__wordmark,
+.manifesto__line,
+.mm-photo__title,
+.landing__title,
+.nav__logo {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+.hero__title { letter-spacing: -0.02em; }
+.nav__logo { letter-spacing: 0; font-weight: 700; font-size: 0.95rem; }
+
+/* MASTERMIND в Unbounded шире — ужимаем, чтобы не вылезал за афишу */
+.mm-poster__wordmark,
+html[data-skin="bold"] .mm-poster__wordmark {
+  font-size: clamp(1.9rem, 6vw, 4.2rem);
+  letter-spacing: 0;
+}
+@media (max-width: 560px) {
+  .mm-poster__wordmark em { display: block; }
+}
+
+/* ------------------------------------------------------------
+   1 · НЕБО — fixed слой за всем контентом
+------------------------------------------------------------ */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  background: #05060a;
+}
+/* ночной градиент + свечение горизонта; --land теплеет к посадке */
+.sky__grad {
+  position: absolute;
+  inset: 0;
+  --land: 0;
+  background:
+    radial-gradient(120% 80% at 50% 118%,
+      rgba(250, 90, 60, calc(0.10 + 0.34 * var(--land))),
+      transparent 55%),
+    radial-gradient(140% 90% at 50% 128%, rgba(250,30,50,0.18), transparent 60%),
+    linear-gradient(180deg, #04040a 0%, #070810 42%, #0c0a12 72%, #14090e 100%);
+}
+/* видео-облёт (опционально): пользователь кинет файл — раскомментируется в HTML */
+.sky__video {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+}
+.sky__stars {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+}
+
+/* облака / слои дымки — большие размытые пятна, летят сквозь кадр */
+.sky__clouds { position: absolute; inset: 0; }
+.sky__cloud {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 78vw; height: 46vw;
+  border-radius: 50%;
+  filter: blur(46px);
+  will-change: transform, opacity;
+  opacity: 0;
+}
+.sky__cloud--1 { background: radial-gradient(circle at 42% 46%, rgba(120,130,165,0.30), transparent 66%); }
+.sky__cloud--2 { background: radial-gradient(circle at 58% 50%, rgba(80,88,120,0.34), transparent 68%); left: 36%; }
+.sky__cloud--3 { background: radial-gradient(circle at 50% 44%, rgba(250,60,70,0.14), transparent 62%); left: 64%; }
+.sky__cloud--4 { background: radial-gradient(circle at 48% 52%, rgba(150,160,200,0.22), transparent 66%); }
+
+/* силуэт города — SVG-скайлайн у нижней кромки */
+.sky__city {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  width: 100%;
+  will-change: transform, opacity;
+  line-height: 0;
+}
+.sky__city svg { width: 100%; height: auto; display: block; }
+.sky__city--far  { bottom: 6vh; opacity: 0.5; filter: blur(1.5px); }
+.sky__city--far  svg { fill: #0b0d18; }
+.sky__city--near svg { fill: #060709; }
+.sky__city--near .win { fill: rgba(255,208,150,0.85); }
+.sky__city--far  .win { fill: rgba(255,208,150,0.4); }
+
+/* приземная дымка над городом */
+.sky__haze {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 42vh;
+  background: linear-gradient(0deg, rgba(20,10,14,0.85), rgba(12,10,18,0.35) 45%, transparent);
+  will-change: opacity;
+}
+
+/* кремль — проявляется на посадке */
+.sky__kremlin {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  width: 100%;
+  opacity: 0;
+  will-change: transform, opacity;
+  line-height: 0;
+}
+.sky__kremlin svg { width: 100%; height: auto; display: block; fill: #07080d; }
+.sky__kremlin .glow { fill: rgba(250,60,70,0.16); }
+.sky__kremlin .win  { fill: rgba(255,206,150,0.9); }
+
+/* ------------------------------------------------------------
+   2 · ХОРЕОГРАФИЯ ПОЛЁТА — perspective-контекст
+   (сама анимация — в animations.js через GSAP.from)
+------------------------------------------------------------ */
+main {
+  perspective: 1400px;
+  perspective-origin: 50% 42%;
+}
+.chapter .container,
+[data-fly] { will-change: transform, opacity, filter; transform-style: preserve-3d; }
+
+/* ------------------------------------------------------------
+   3 · МАНИФЕСТЫ — слова-фразы проносятся навстречу
+   Секция-интерстишл между главами: почти пустое небо + крупный
+   кегль. GSAP гонит .manifesto__line из глубины сквозь камеру.
+------------------------------------------------------------ */
+.manifesto {
+  position: relative;
+  min-height: 78vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8vh var(--gutter);
+  overflow: hidden;
+}
+.manifesto__line {
+  margin: 0;
+  font-weight: 900;
+  line-height: 0.95;
+  font-size: clamp(2.4rem, 9vw, 8rem);
+  text-transform: uppercase;
+  color: var(--c-text);
+  text-wrap: balance;
+  will-change: transform, opacity;
+}
+.manifesto__line .accent {
+  color: var(--c-accent);
+  text-shadow: 0 0 28px rgba(250,30,50,0.4);
+}
+.manifesto__sub {
+  margin-top: 1.4rem;
+  font-size: clamp(0.95rem, 1.5vw, 1.25rem);
+  color: var(--c-muted);
+  max-width: 40ch;
+  margin-left: auto; margin-right: auto;
+}
+
+/* ------------------------------------------------------------
+   4 · СЦЕНА ПОСАДКИ — приземление у кремля
+------------------------------------------------------------ */
+.landing {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12vh var(--gutter) 8vh;
+}
+.landing__kicker {
+  justify-content: center;
+  color: #ffb9c1;
+}
+.landing__title {
+  font-weight: 900;
+  font-size: clamp(2.2rem, 7vw, 6rem);
+  line-height: 1.0;
+  text-transform: uppercase;
+  margin: 0.4em 0;
+}
+.landing__title .accent { color: var(--c-accent); text-shadow: 0 0 50px rgba(250,30,50,0.45); }
+.landing__sub {
+  max-width: 46ch;
+  color: #cfcfd6;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  margin: 0 auto 2rem;
+}
+
+/* ------------------------------------------------------------
+   4b · ПОЧИНКИ: центровка афиши, разнос кнопок, полировка кодекса
+------------------------------------------------------------ */
+/* афиша MASTERMIND — по центру героя */
+.hero .countdown-block.mm-poster { margin-left: auto; margin-right: auto; }
+
+/* CTA-кнопки героя — гарантированный зазор, без нахлёста */
+.hero__actions {
+  gap: 1.25rem;
+  row-gap: 1rem;
+  align-items: center;
+  margin-top: var(--space-l);
+}
+.hero__actions .btn { flex: 0 0 auto; }
+
+/* КОДЕКС — свод в две колонки, крупные контурные номера */
+.codex .codex__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: clamp(1.6rem, 4vw, 3.4rem);
+  row-gap: 0;
+  align-items: start;
+}
+.codex .rule {
+  align-items: flex-start;
+  gap: 1.1rem;
+  padding: 1.15rem 0;
+}
+.codex .rule__num {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(250, 30, 50, 0.55);
+  text-shadow: none;
+  transition: -webkit-text-stroke-color 0.3s var(--ease-out), text-shadow 0.3s var(--ease-out);
+}
+.codex .rule:hover .rule__num {
+  -webkit-text-stroke-color: var(--c-accent);
+  text-shadow: 0 0 26px rgba(250, 30, 50, 0.55);
+}
+.codex .rule__body b { transition: color 0.3s var(--ease-out); }
+.codex .rule:hover .rule__body b { color: #fff; }
+@media (max-width: 720px) {
+  .codex .codex__list { grid-template-columns: 1fr; }
+}
+
+/* ------------------------------------------------------------
+   5 · МОБИЛКА — облегчённый полёт
+------------------------------------------------------------ */@media (max-width: 768px) {
+  main { perspective: 900px; }
+  .sky__cloud { filter: blur(30px); width: 120vw; height: 90vw; }
+  .sky__haze { height: 34vh; }
+  .manifesto { min-height: 62vh; }
+  .landing { min-height: 80vh; }
+}
+
+/* ------------------------------------------------------------
+   6 · REDUCED MOTION — гасим движение, оставляем читаемость
+------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .sky__cloud { opacity: 0 !important; }
+  .sky__city, .sky__kremlin { transform: none !important; opacity: 0.5 !important; }
+  .sky__kremlin { opacity: 0.5 !important; }
+  .manifesto { min-height: 46vh; }
+  .manifesto__line, [data-fly], .chapter .container { transform: none !important; filter: none !important; opacity: 1 !important; }
+}
+
+/* ------------------------------------------------------------
+   7 · ЗАЛ СЛАВЫ — 3D-коридор досье, ленты ведут к Рафаэлю
+------------------------------------------------------------ */
+.hall {
+  position: relative;
+  margin-top: var(--space-l);
+  height: clamp(560px, 82vh, 780px);
+  overflow: hidden;
+  perspective: 1150px;
+  perspective-origin: 50% 44%;
+  background:
+    radial-gradient(ellipse 70% 75% at 50% 44%, rgba(36,10,14,0.55), #030304 72%),
+    #020204;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+.hall:active { cursor: grabbing; }
+.hall__rails {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 1;
+  filter: drop-shadow(0 0 14px rgba(250,30,50,0.5));
+}
+.hall__stage {
+  position: absolute; inset: 0;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  will-change: transform;
+  z-index: 2;
+}
+.hall__haze {
+  position: absolute; inset: 0; pointer-events: none; z-index: 3;
+  background:
+    radial-gradient(ellipse 42% 34% at 50% 42%, rgba(250,40,55,0.16), transparent 62%),
+    radial-gradient(ellipse 120% 62% at 50% 122%, rgba(0,0,0,0.55), transparent 60%);
+}
+.hall__vign {
+  position: absolute; inset: 0; pointer-events: none; z-index: 3;
+  box-shadow: inset 0 0 150px 46px rgba(0,0,0,0.88);
+}
+
+/* карточка-«вешалка» */
+.hof-card {
+  position: absolute; left: 50%; top: 44%;
+  width: clamp(150px, 15vw, 200px);
+  margin: 0; padding: 0; border: 0; background: none;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%) translate3d(calc(var(--x) * var(--sx, 1)), var(--y), calc(var(--z) * var(--sz, 1))) rotateY(var(--ry));
+  transition: transform 0.55s var(--ease-out);
+  cursor: pointer;
+}
+.hof-card:hover, .hof-card:focus-visible { --ry: 0deg; outline: none; z-index: 10; }
+.hof-card__inner {
+  position: relative; width: 100%; aspect-ratio: 3/4;
+  transform-style: preserve-3d;
+  transition: transform 0.6s var(--ease-inout);
+}
+.hof-card.is-flipped .hof-card__inner { transform: rotateY(180deg); }
+.hof-card__face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 12px; overflow: hidden;
+}
+.hof-card__front {
+  background: #0e0f14;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(250,30,50,0.12);
+}
+.hof-card:hover .hof-card__front {
+  box-shadow: 0 30px 72px rgba(0,0,0,0.75), 0 0 30px rgba(250,30,50,0.4);
+}
+.hof-card__photo { position: absolute; inset: 0; }
+.hof-card__photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.5) contrast(1.05); transition: filter 0.4s var(--ease-out); }
+.hof-card:hover .hof-card__photo img { filter: grayscale(0); }
+.hof-card__ph-empty {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 2.6rem; color: rgba(255,255,255,0.28);
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0 6px, transparent 6px 12px);
+}
+.hof-card__cap {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 0.7rem 0.8rem;
+  background: linear-gradient(0deg, rgba(4,4,6,0.94), transparent);
+}
+.hof-card__cap b { display: block; font-size: 0.82rem; color: #fff; }
+.hof-card__cap span { font-size: 0.7rem; color: var(--c-muted); }
+.hof-card__back {
+  transform: rotateY(180deg);
+  background: linear-gradient(165deg, #1a0e12, #0a0709);
+  border: 1px solid rgba(250,30,50,0.42);
+  display: flex; flex-direction: column; gap: 0.7rem; padding: 1.1rem; text-align: left;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 30px rgba(250,30,50,0.2);
+}
+.hof-card__kick { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: #ffb9c1; }
+.hof-card__essence { font-size: 0.84rem; line-height: 1.42; color: #e8e8ec; }
+.hof-card__open {
+  align-self: flex-start; margin-top: auto;
+  font-size: 0.74rem; font-weight: 700; letter-spacing: 0.03em; color: #fff;
+  background: var(--c-accent); border: 0; border-radius: 8px; padding: 0.55em 0.9em; cursor: pointer;
+  transition: box-shadow 0.25s var(--ease-out);
+}
+.hof-card__open:hover { box-shadow: 0 0 22px rgba(250,30,50,0.55); }
+
+/* Рафаэль — в конце коридора, красный контур + дымка */
+.hall__rafael {
+  position: absolute; left: 50%; top: 44%;
+  width: clamp(180px, 20vw, 258px);
+  transform: translate(-50%, -50%) translateZ(calc(var(--rz, -3520px) * var(--sz, 1)));
+  transform-style: preserve-3d; cursor: pointer;
+}
+.hall__rafael-photo {
+  position: relative; aspect-ratio: 3/4; border-radius: 14px; overflow: hidden;
+  border: 1px solid rgba(250,30,50,0.65);
+  box-shadow: 0 0 4px rgba(250,30,50,0.85), 0 0 44px 6px rgba(250,30,50,0.5), 0 0 130px 34px rgba(250,30,50,0.34);
+}
+.hall__rafael-photo img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) brightness(0.9); }
+.hall__rafael-label {
+  margin-top: 0.7rem; text-align: center;
+  font-family: var(--font-display); font-weight: 900; font-size: 0.8rem; letter-spacing: 0.02em; color: #fff;
+  text-shadow: 0 0 24px rgba(250,30,50,0.75);
+}
+.hall__rafael-role { text-align: center; font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-muted); margin-top: 0.3rem; }
+
+/* управление */
+.hall__ctrl {
+  position: absolute; z-index: 5; top: 50%; transform: translateY(-50%);
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2); background: rgba(10,10,14,0.6);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  color: #fff; font-size: 1.3rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.hall__ctrl--prev { left: 16px; } .hall__ctrl--next { right: 16px; }
+.hall__ctrl:hover { border-color: var(--c-accent); box-shadow: 0 0 20px rgba(250,30,50,0.4); }
+.hall__hint {
+  position: absolute; z-index: 5; left: 50%; bottom: 14px; transform: translateX(-50%);
+  font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-muted);
+  pointer-events: none; white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  /* защита от горизонтального вылета декора и широких блоков */
+  html, body { overflow-x: hidden; }
+  /* зал → простой список карточек 2×N, без тяжёлого 3D и pin */
+  .hall { height: auto; perspective: none; overflow: visible; cursor: default; background: none; }
+  .hall__rails, .hall__haze, .hall__vign, .hall__hint { display: none; }
+  .hall__stage {
+    position: static; transform: none !important; transform-style: flat;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .hof-card { position: static; transform: none !important; width: auto; }
+  .hof-card:hover, .hof-card:focus-visible { z-index: auto; }
+  .hof-card__inner { aspect-ratio: 3/4; }
+  .hof-card__photo img { filter: grayscale(0.15); }
+  .hall__rafael {
+    position: static; transform: none !important; width: auto; grid-column: 1 / -1;
+    margin-top: 8px; display: flex; flex-direction: column; align-items: center;
+  }
+  .hall__rafael-photo { width: 62%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hof-card, .hof-card__inner, .hall__stage { transition: none !important; }
+}
+
+/* режим авто-проката для записи 9×16 — прячем служебное */
+.is-reel .nav,
+.is-reel .hall__hint,
+.is-reel .cursor,
+.is-reel .network__hint { opacity: 0 !important; }
+
+/* ============================================================
+   8 · КОДЕКС v2 — свод-плита с объёмом (правки поверх upgrade.css)
+   Глубже стекло, красный свет за буквами, ambient читается сквозь.
+============================================================ */
+.codex {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% -4%, rgba(250,30,50,0.14), transparent 60%),
+    radial-gradient(ellipse 90% 70% at 50% 120%, rgba(250,30,50,0.05), transparent 62%),
+    linear-gradient(rgba(6,6,9,0.18), rgba(6,6,9,0.30)) !important;
+}
+.codex .container { position: relative; }
+/* мягкий красный «прожектор» за плитой — объём, ambient не перекрыт */
+.codex .container::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 34%;
+  width: min(760px, 86%); height: 60%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(250,30,50,0.20), transparent 70%);
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
+}
+.codex .codex__list {
+  position: relative;
+  z-index: 1;
+  background:
+    radial-gradient(130% 90% at 16% -6%, rgba(255,255,255,0.06), transparent 52%),
+    linear-gradient(165deg, rgba(38,26,32,0.42), rgba(9,9,13,0.56)) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  border-top-color: rgba(255,120,132,0.30) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.12),
+    inset 0 0 90px rgba(250,30,50,0.06),
+    0 34px 90px rgba(0,0,0,0.55),
+    0 0 90px rgba(250,30,50,0.12) !important;
+}
+/* контурные номера крупнее и с внутренним накалом */
+.codex .rule__num {
+  font-size: clamp(2.3rem, 3.6vw, 3.2rem) !important;
+  -webkit-text-stroke: 1px rgba(250,30,50,0.5);
+  text-shadow: 0 0 30px rgba(250,30,50,0.35) !important;
+}
+.codex .rule:hover .rule__num {
+  text-shadow: 0 0 34px rgba(250,30,50,0.7) !important;
+}
+
+/* ============================================================
+   9 · ФИНАЛ КОРИДОРА — godrays + bloom за портретом Рафаэля
+============================================================ */
+.hall__rafael-photo::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 46%;
+  width: 300%; height: 300%;
+  transform: translate(-50%, -50%);
+  background: repeating-conic-gradient(from 0deg at 50% 50%,
+    rgba(255,120,130,0.16) 0deg 2.2deg,
+    transparent 2.2deg 9deg);
+  -webkit-mask: radial-gradient(closest-side, #000 8%, transparent 70%);
+          mask: radial-gradient(closest-side, #000 8%, transparent 70%);
+  filter: blur(3px);
+  z-index: -1;
+  pointer-events: none;
+  animation: rafRays 26s linear infinite;
+}
+/* тёплый bloom-ореол */
+.hall__rafael-photo::after {
+  content: "";
+  position: absolute;
+  inset: -60% -60% -40%;
+  background: radial-gradient(ellipse at 50% 42%, rgba(250,40,55,0.42), transparent 66%);
+  filter: blur(30px);
+  z-index: -1;
+  pointer-events: none;
+}
+.hall__rafael-photo {
+  box-shadow:
+    0 0 4px rgba(250,30,50,0.9),
+    0 0 60px 8px rgba(250,30,50,0.6),
+    0 0 170px 46px rgba(250,30,50,0.4) !important;
+}
+@keyframes rafRays { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .hall__rafael-photo::before { animation: none; }
+}
+
+/* ------------------------------------------------------------
+   MOBILE FIX (12.10) — переносы, обрезка hero, шапка
+------------------------------------------------------------ */
+.nav .btn { white-space: nowrap; }
+/* контент hero не должен уходить под фиксированную шапку */
+.hero { padding-top: 104px; padding-bottom: var(--space-l); }
+@media (max-width: 640px) {
+  :root { --fs-hero: clamp(1.8rem, 10.4vw, 3.4rem); }
+  /* контент hero выше экрана: центрирование прятало верх под шапку */
+  .hero { align-items: flex-start; padding-top: 88px; }
+  .nav__inner { height: 60px; }
+  .nav__logo { font-size: 0.8rem; }
+  .nav .btn { padding: 0.6em 1em !important; font-size: 0.72rem !important; }
+  /* Unbounded широкий: длинные слова («предпринимателей») должны влезать целиком */
+  .section__title { font-size: clamp(1.2rem, 6vw, 2.1rem); line-height: 1.12; }
+  .final__title { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+  .manifesto__line, .landing__title, .mm-photo__title { font-size: clamp(1.7rem, 8.4vw, 2.6rem) !important; }
+}
+.founder__grid > * { min-width: 0; }
+@media (max-width: 380px) {
+  .founder__facts .stat__number { font-size: 1.3rem !important; }
+}
+/* временная пометка битых видеоотзывов (файлов нет) — убрать после перезаливки */
+.video-card[data-broken] { position: relative; }
+.video-card__broken {
+  position: absolute; top: 10px; left: 10px; z-index: 3;
+  background: #FFD400; color: #111; font: 700 0.75rem/1.2 var(--font-main);
+  padding: 0.35em 0.6em; border-radius: 6px;
+}
