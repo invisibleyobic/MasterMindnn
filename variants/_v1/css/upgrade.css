@@ -1,0 +1,454 @@
+/* ============================================================
+   upgrade.css — доупаковка: объём, атмосфера, liquid glass,
+   афиша MASTERMIND и система вариантов (calm / bold).
+   Подключается ПОСЛЕДНИМ — осознанно переопределяет sections.css.
+
+   Варианты: html[data-skin="bold"] — смелая версия.
+   По умолчанию (без атрибута) — сдержанная.
+============================================================ */
+
+/* ------------------------------------------------------------
+   1 · АМБИЕНТНЫЙ ФОН: дышащие размытые формы вместо плоской
+   темноты. Слой fixed за всем контентом; секции полупрозрачны,
+   поэтому свет «протекает» сквозь главы и стекло карточек.
+------------------------------------------------------------ */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 120% 90% at 50% -10%, #101014, transparent 60%),
+    var(--c-bg-deep);
+  pointer-events: none;
+}
+.ambient__blob {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+  opacity: 0.55;
+}
+/* красное свечение — правый верх, медленно плывёт */
+.ambient__blob--a {
+  width: 52vmax; height: 42vmax;
+  top: -14vmax; right: -12vmax;
+  background: radial-gradient(circle at 40% 40%, rgba(250,30,50,0.14), rgba(122,15,26,0.05) 55%, transparent 72%);
+  animation: ambDriftA 46s var(--ease-inout) infinite alternate;
+}
+/* холодный графитовый дым — слева по центру */
+.ambient__blob--b {
+  width: 60vmax; height: 52vmax;
+  top: 22%; left: -22vmax;
+  background: radial-gradient(circle at 55% 45%, rgba(150,160,190,0.055), rgba(90,95,120,0.02) 55%, transparent 74%);
+  animation: ambDriftB 64s var(--ease-inout) infinite alternate;
+}
+/* тлеющие угли — низ, глубокий красный */
+.ambient__blob--c {
+  width: 48vmax; height: 40vmax;
+  bottom: -16vmax; left: 24%;
+  background: radial-gradient(circle at 50% 55%, rgba(180,20,40,0.10), rgba(122,15,26,0.04) 55%, transparent 72%);
+  animation: ambDriftC 55s var(--ease-inout) infinite alternate;
+}
+@keyframes ambDriftA {
+  0%   { transform: translate3d(0,0,0) scale(1); }
+  100% { transform: translate3d(-9vmax, 7vmax, 0) scale(1.18); }
+}
+@keyframes ambDriftB {
+  0%   { transform: translate3d(0,0,0) scale(1); }
+  100% { transform: translate3d(11vmax, -6vmax, 0) scale(1.12); }
+}
+@keyframes ambDriftC {
+  0%   { transform: translate3d(0,0,0) scale(1); }
+  100% { transform: translate3d(-7vmax, -5vmax, 0) scale(1.22); }
+}
+
+/* body становится прозрачным — свет идёт от .ambient */
+body { background: transparent; }
+
+/* ------------------------------------------------------------
+   2 · ТОНИРОВКА ГЛАВ: каждая секция — свой оттенок темноты,
+   полупрозрачный, чтобы амбиент дышал сквозь неё.
+   Плюс светлая верхняя кромка = ощущение слоёв.
+------------------------------------------------------------ */
+.chapter { box-shadow: inset 0 1px 0 rgba(255,255,255,0.035); }
+
+.hero { background: linear-gradient(rgba(6,6,7,0.30), rgba(6,6,7,0.55)); }
+
+.who {
+  background:
+    radial-gradient(ellipse 70% 42% at 50% 0%, rgba(255,255,255,0.028), transparent 60%),
+    linear-gradient(180deg, rgba(17,17,22,0.74), rgba(13,13,17,0.80));
+}
+.network {
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 32%, rgba(250,30,50,0.045), transparent 68%),
+    linear-gradient(rgba(7,7,9,0.55), rgba(7,7,9,0.62));
+}
+.proof {
+  background:
+    radial-gradient(ellipse 60% 35% at 18% 0%, rgba(255,220,160,0.02), transparent 60%),
+    linear-gradient(180deg, rgba(17,17,22,0.76), rgba(13,13,17,0.80));
+}
+.founder {
+  background:
+    radial-gradient(ellipse 42% 60% at 20% 50%, rgba(250,30,50,0.06), transparent 66%),
+    linear-gradient(rgba(7,7,9,0.52), rgba(7,7,9,0.60));
+}
+.circles {
+  background:
+    radial-gradient(ellipse 46% 40% at 50% 34%, rgba(250,30,50,0.05), transparent 66%),
+    linear-gradient(180deg, rgba(17,17,22,0.74), rgba(13,13,17,0.80));
+}
+.codex {
+  background:
+    radial-gradient(ellipse 54% 46% at 50% 8%, rgba(250,30,50,0.07), transparent 62%),
+    linear-gradient(rgba(9,9,12,0.30), rgba(9,9,12,0.40));
+}
+/* Кодекс = свод правил на подсвеченной стеклянной плите:
+   объём и блюр за буквами, амбиент читается сквозь. */
+.codex .codex__list {
+  padding: clamp(1.4rem, 3vw, 2.6rem) clamp(1.4rem, 3.4vw, 3rem);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.10);
+  border-top-color: rgba(255,255,255,0.20);
+  background:
+    radial-gradient(120% 80% at 18% 0%, rgba(255,255,255,0.05), transparent 55%),
+    linear-gradient(165deg, rgba(30,30,40,0.34), rgba(12,12,17,0.44));
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  backdrop-filter: blur(18px) saturate(1.3);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.10),
+    0 26px 70px rgba(0,0,0,0.45),
+    0 0 60px rgba(250,30,50,0.06);
+}
+.codex .rule { border-bottom-color: rgba(255,255,255,0.09); }
+.codex .rule:last-child { border-bottom: none; }
+.codex .rule__num {
+  text-shadow: 0 0 22px rgba(250,30,50,0.55);
+}
+/* угол для змейки-импульса по контуру шага */
+@property --snake-ang { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@keyframes snake-run { to { --snake-ang: 360deg; } }
+
+/* Твой путь: на hover по плашке шага бежит зелёный импульс-змейка
+   по контуру, закольцованно (эхо экрана загрузки). */
+.path__card { position: relative; }
+.path__card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(from var(--snake-ang),
+    transparent 0deg 296deg,
+    rgba(46,213,115,0.15) 312deg,
+    #2ed573 344deg,
+    #9bffc4 356deg,
+    transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 3;
+  filter: drop-shadow(0 0 6px rgba(46,213,115,0.55));
+}
+.path__card:hover::after {
+  opacity: 1;
+  animation: snake-run 2.1s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .path__card:hover::after { animation: none; opacity: 1; background: none; box-shadow: inset 0 0 0 2px rgba(46,213,115,0.6); }
+}
+
+.path {
+  background:
+    radial-gradient(ellipse 60% 40% at 82% 8%, rgba(255,255,255,0.02), transparent 60%),
+    linear-gradient(180deg, rgba(17,17,22,0.74), rgba(13,13,17,0.80));
+}
+.location { background: linear-gradient(rgba(7,7,9,0.52), rgba(7,7,9,0.58)); }
+.final {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 110%, rgba(250,30,50,0.18), transparent 65%),
+    linear-gradient(rgba(7,7,9,0.45), rgba(7,7,9,0.55));
+}
+
+/* ------------------------------------------------------------
+   3 · LIQUID GLASS: тарифы + факты Рафаэля.
+   Сквозь стекло видно амбиентный свет и тонировку главы.
+------------------------------------------------------------ */
+.tariff,
+.founder__facts .card {
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(255,255,255,0.05), transparent 55%),
+    linear-gradient(165deg, rgba(30,30,40,0.36), rgba(12,12,17,0.52));
+  -webkit-backdrop-filter: blur(16px) saturate(1.35);
+  backdrop-filter: blur(16px) saturate(1.35);
+  border-color: rgba(255,255,255,0.12);
+  border-top-color: rgba(255,255,255,0.22);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.10),
+    0 24px 60px rgba(0,0,0,0.45);
+}
+.tariff--feature {
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(250,30,50,0.14), transparent 55%),
+    linear-gradient(165deg, rgba(34,24,30,0.42), rgba(14,12,16,0.55));
+  border-color: rgba(250,30,50,0.55);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.12),
+    0 24px 70px rgba(0,0,0,0.5),
+    0 0 44px rgba(250,30,50,0.10);
+}
+
+/* видеоотзыв участника внизу открытого досье */.dossier__video {
+  margin-top: 1.4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+.dossier__video-label {
+  display: block;
+  font-size: var(--fs-small);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+  margin-bottom: 0.6rem;
+}
+.dossier__video video {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  background: #000;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.08),
+    0 18px 46px rgba(0,0,0,0.5);
+}
+
+/* ------------------------------------------------------------
+   4 · АФИША MASTERMIND (hero): таймер-блок = афиша перезапуска.
+------------------------------------------------------------ */
+.countdown-block { position: relative; }
+.mm-poster {
+  max-width: 720px;
+  overflow: hidden;
+}
+/* красный свет из-за верхней кромки афиши */
+.mm-poster::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(62% 46% at 50% 0%, rgba(250,30,50,0.12), transparent 70%);
+  pointer-events: none;
+}
+.mm-poster__head {
+  position: relative;
+  text-align: center;
+  padding-bottom: var(--space-m);
+  margin-bottom: var(--space-m);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+.mm-poster__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.mm-poster__pulse {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  box-shadow: 0 0 12px var(--c-accent-glow);
+  animation: mmLive 1.9s var(--ease-inout) infinite;
+}
+@keyframes mmLive {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.5); opacity: 0.55; }
+}
+.mm-poster__wordmark {
+  font-size: clamp(2.3rem, 6.2vw, 4.4rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.015em;
+  margin: 0.28em 0 0.22em;
+  white-space: nowrap;
+}
+.mm-poster__wordmark em {
+  font-style: normal;
+  color: var(--c-accent);
+  text-shadow: 0 0 36px var(--c-accent-glow);
+}
+.mm-poster__meta {
+  font-size: 0.92rem;
+  color: #cfcfd6;
+}
+.mm-poster__meta i {
+  font-style: normal;
+  color: var(--c-accent);
+  margin: 0 0.55em;
+}
+.mm-poster .countdown-block__msg { text-align: center; }
+.mm-poster .countdown-block__bonus { text-align: center; }
+/* стеклянные ячейки таймера — глубже */
+.mm-poster .countdown__cell {
+  background: rgba(255,255,255,0.045);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-color: rgba(255,255,255,0.10);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+}
+
+/* ------------------------------------------------------------
+   5 · ВАРИАНТ «СМЕЛЫЙ» — html[data-skin="bold"]
+   Атмосфера гуще, афиша громче, стекло глубже.
+------------------------------------------------------------ */
+html[data-skin="bold"] .ambient__blob { opacity: 0.95; }
+html[data-skin="bold"] .ambient__blob--a { filter: blur(80px); }
+html[data-skin="bold"] .hero__glow { filter: saturate(1.25) brightness(1.35); }
+
+html[data-skin="bold"] .mm-poster { max-width: 760px; }
+html[data-skin="bold"] .mm-poster__label { color: #ffb9c1; }
+html[data-skin="bold"] .mm-poster__wordmark {
+  font-size: clamp(2.6rem, 7.6vw, 5.6rem);
+  letter-spacing: 0.03em;
+}
+html[data-skin="bold"] .mm-poster__wordmark em {
+  -webkit-text-stroke: 1.5px var(--c-accent);
+  color: transparent;
+  text-shadow: 0 0 44px rgba(250,30,50,0.5);
+  animation: mmNeon 3.2s var(--ease-inout) infinite;
+}
+@keyframes mmNeon {
+  0%, 100% { text-shadow: 0 0 30px rgba(250,30,50,0.35); }
+  50%      { text-shadow: 0 0 60px rgba(250,30,50,0.75); }
+}
+html[data-skin="bold"] .mm-poster::before {
+  background: radial-gradient(66% 52% at 50% 0%, rgba(250,30,50,0.20), transparent 72%);
+}
+html[data-skin="bold"] .mm-poster {
+  border-color: rgba(250,30,50,0.30);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.12),
+    inset 0 -10px 24px rgba(250,30,50,0.07),
+    0 20px 60px rgba(0,0,0,0.4),
+    0 0 60px rgba(250,30,50,0.12);
+}
+html[data-skin="bold"] .tariff,
+html[data-skin="bold"] .founder__facts .card {
+  -webkit-backdrop-filter: blur(22px) saturate(1.45);
+  backdrop-filter: blur(22px) saturate(1.45);
+}
+html[data-skin="bold"] .who,
+html[data-skin="bold"] .circles {
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 0%, rgba(250,30,50,0.06), transparent 62%),
+    linear-gradient(180deg, rgba(17,17,22,0.66), rgba(13,13,17,0.74));
+}
+html[data-skin="bold"] .marquee__track { color: rgba(250,30,50,0.75); }
+html[data-skin="bold"] .final {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 110%, rgba(250,30,50,0.28), transparent 68%),
+    linear-gradient(rgba(7,7,9,0.40), rgba(7,7,9,0.50));
+}
+
+/* ------------------------------------------------------------
+   7 · МОБИЛЬНАЯ ДЕГРАДАЦИЯ: дешевле blur, спокойнее амбиент.
+------------------------------------------------------------ */
+@media (max-width: 768px) {
+  .ambient__blob { filter: blur(48px); animation-duration: 90s; }
+  .tariff,
+  .founder__facts .card {
+    -webkit-backdrop-filter: blur(8px) saturate(1.2);
+    backdrop-filter: blur(8px) saturate(1.2);
+  }
+  html[data-skin="bold"] .tariff,
+  html[data-skin="bold"] .founder__facts .card {
+    -webkit-backdrop-filter: blur(10px) saturate(1.25);
+    backdrop-filter: blur(10px) saturate(1.25);
+  }
+  .mm-poster .countdown__cell {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .mm-poster__wordmark { white-space: normal; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient__blob, .mm-poster__pulse,
+  html[data-skin="bold"] .mm-poster__wordmark em { animation: none !important; }
+  .ymap-pin__pulse { animation: none !important; }
+}
+
+/* ------------------------------------------------------------
+   8 · КАРТА ЯНДЕКСА (тёмная) + фирменный пин.
+------------------------------------------------------------ */
+#ymap { background: #0a0a0e; }
+#ymap::before { display: none; } /* убираем декоративную сетку — рисует реальная карта */
+#ymap .ymaps3x0--map { border-radius: var(--r-l); }
+#ymap .ymaps3x0--map-copyrights { opacity: 0.5; }
+
+/* фолбэк, когда API карты недоступен (превью / чужой домен) */
+.location__map--static {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(250,30,50,0.10), transparent 45%),
+    linear-gradient(#101014, #0a0a0e) !important;
+}
+.location__map--static::before {
+  display: block !important;
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.ymap-fallback { position: relative; text-align: center; }
+
+.ymap-pin {
+  position: relative;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.ymap-pin__dot {
+  display: block;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  box-shadow: 0 0 0 3px rgba(250,30,50,0.25), 0 4px 12px rgba(0,0,0,0.6);
+}
+.ymap-pin__pulse {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 16px; height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  border: 1px solid var(--c-accent);
+  animation: pinPulse 2.2s var(--ease-out, ease-out) infinite;
+}
+.ymap-pin__label {
+  position: absolute;
+  left: 50%; bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  background: rgba(16,16,20,0.9);
+  border: 1px solid rgba(255,255,255,0.14);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 0.4em 0.8em;
+  border-radius: var(--r-s);
+  font-size: var(--fs-small);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.5);
+}

@@ -4,7 +4,7 @@
   python3 tools/variants_bg.py   → variants/bg-hero/, variants/bg-fullpage/, variants/bg-section/ + variants/index.html
 Видео ждём в assets/video/mastermind/ (имена из HANDOFF): если файла нет — остаётся постер, страница не ломается.
 """
-import pathlib, re
+import pathlib, re, shutil
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = (ROOT / "v1.html").read_text(encoding="utf-8")
@@ -57,23 +57,21 @@ JS = """
     });
     var p = v.play(); if (p && p.catch) p.catch(function () {});
   });
-  /* вариант «блок со звуком»: по кнопке включаем полный ролик со звуком */
-  var btn = document.querySelector(".mm-watch__btn");
-  if (btn) btn.addEventListener("click", function () {
-    var v = document.querySelector(".mm-watch__frame video");
-    v.dataset.reel = "1";
-    var ext = webm === ".webm" ? ".webm" : ".mp4";
-    v.src = V + (mob ? "mastermind-reel-9x16-social" : "mastermind-reel-16x9-social") + ext;
-    /* нет горизонтального ролика со звуком — показываем вертикальный */
-    v.addEventListener("error", function () { if (v.src.indexOf("9x16") === -1) { v.src = V + "mastermind-reel-9x16-social" + ext; var q = v.play(); if (q && q.catch) q.catch(function () {}); } });
-    v.muted = false; v.loop = false; v.controls = true; v.currentTime = 0;
-    var p = v.play(); if (p && p.catch) p.catch(function () {});
-    btn.hidden = true;
-  });
 })();
 </script>""" % V
 
 VIDEO = '<video autoplay muted loop playsinline preload="metadata"></video>'
+
+
+def copy_v1_assets():
+    """Свои копии css/js v1 — чтобы варианты работали и там, где лежат старые файлы (ветка main / живой домен)."""
+    dst = ROOT / "variants" / "_v1"
+    for sub, ext in (("css", "*.css"), ("js", "*.js")):
+        (dst / sub).mkdir(parents=True, exist_ok=True)
+        for f in (ROOT / sub).glob(ext):
+            if f.name.startswith(("site", "theme-")):
+                continue
+            shutil.copy2(f, dst / sub / f.name)
 
 
 def base():
@@ -81,6 +79,7 @@ def base():
     # пути: вариант лежит в variants/<id>/ — всё локальное на два уровня вверх
     h = re.sub(r'(href|src|data-src|poster|data-video-local)="(?!https?:|#|data:|mailto:|tel:)([^"]+)"', r'\1="../../\2"', h)
     h = h.replace('url(assets/', 'url(../../assets/')
+    h = re.sub(r'"\.\./\.\./(css|js)/', r'"../_v1/\1/', h)
     h = h.replace('<meta name="robots" content="noindex, follow">', '<meta name="robots" content="noindex">')
     # облёт неба (sky.js) не грузим — фоном теперь ролик MasterMind
     h = re.sub(r'<video class="sky__video" data-src="[^"]*"[^>]*></video>', '', h)
@@ -96,6 +95,7 @@ def write(vid, html, title):
     print("ok", out.relative_to(ROOT))
 
 
+copy_v1_assets()
 h = base()
 write("bg-hero", h.replace('<section class="hero" aria-label="Главный экран">',
       '<section class="hero" aria-label="Главный экран">\n      <div class="mm-bg" aria-hidden="true">' + VIDEO + '</div>', 1), "bg-hero")
@@ -104,23 +104,43 @@ write("bg-fullpage", h.replace('<div class="sky" aria-hidden="true">',
       .replace('<div class="sky" aria-hidden="true">', '<div class="sky" aria-hidden="true" style="opacity:.6">', 1), "bg-fullpage")
 SECTION = '''<section class="mm-watch" aria-label="Смотри, как это работает"><div class="container">
       <p class="kicker">Смотри, как это работает</p>
-      <div class="mm-watch__frame"><video muted loop playsinline preload="metadata"></video>
-        <button class="mm-watch__btn" type="button">Смотреть со звуком</button></div>
+      <div class="mm-watch__frame"><video autoplay muted loop playsinline preload="metadata"></video>
+</div>
     </div></section>
 
     '''
 write("bg-section", h.replace('<section class="manifesto" aria-label="Связи решают">', SECTION + '<section class="manifesto" aria-label="Связи решают">', 1), "bg-section")
 
-(ROOT / "variants" / "index.html").write_text("""<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex"><title>Варианты фона — ролик MasterMind</title><link rel="icon" href="../assets/brand/logo-red.svg" type="image/svg+xml">
-<style>body{margin:0;background:#0A0A0C;color:#F2F2F4;font:16px/1.5 system-ui,sans-serif;padding:clamp(24px,5vw,64px) 16px}.w{max-width:900px;margin:0 auto}
-h1{margin:0 0 .4rem;font-size:clamp(1.5rem,4vw,2.2rem)}p{color:#9a9aa3;margin:0 0 2rem}.g{display:grid;gap:10px}
-a.v{display:grid;gap:.3rem;padding:1.1rem 1.2rem;border:1px solid #26262e;border-radius:14px;color:inherit;text-decoration:none}a.v:hover{border-color:#FA1E32}
-a.v b{font-size:1.15rem}a.v span{color:#c9c9d0}a.back{color:#9a9aa3}</style></head><body><div class="w">
-<h1>Ролик MasterMind фоном — 3 варианта</h1><p>Основа — текущая версия сайта (v1). Живой сайт и main не тронуты. <a class="back" href="../index.html">← все версии</a></p>
-<div class="g">
-<a class="v" href="bg-hero/index.html"><b>1 · bg-hero</b><span>Ролик только за первым экраном, тёмный градиент поверх — текст читается.</span></a>
-<a class="v" href="bg-fullpage/index.html"><b>2 · bg-fullpage</b><span>Ролик закреплён за всей страницей, приглушён (прозрачность ~0.3).</span></a>
-<a class="v" href="bg-section/index.html"><b>3 · bg-section</b><span>Отдельный блок «Смотри, как это работает» после первого экрана, кнопка «Смотреть со звуком».</span></a>
-</div></div></body></html>""", encoding="utf-8")
+HUB_CARDS_VIDEO = [
+    ("bg-hero/index.html", "1 · bg-hero", "ВЫБРАН", "Ролик за первым экраном, тёмный градиент поверх — самый сильный первый экран."),
+    ("bg-fullpage/index.html", "2 · bg-fullpage", "", "Ролик закреплён за всей страницей, приглушён."),
+    ("bg-section/index.html", "3 · bg-section", "", "Ролик отдельным блоком после первого экрана, без звука."),
+]
+HUB_CARDS_DESIGN = [
+    ("../e/index.html", "E · Закрытый клуб", "новая", "Чёрные и светлые блоки, надпись на весь экран, ч/б фото."),
+    ("../d/index.html", "D · Туман и стекло", "", "Слайды на телефоне, бенто на компьютере."),
+    ("../codex/index.html", "Codex · Осенний город", "", "Версия Codex: мобильные слайды, три круга."),
+    ("../a/index.html", "A · Тёмная осень", "", "Медь, портрет Рафаэля на первом экране."),
+    ("../b/index.html", "B · Клубный", "", "Чёрный + шампань, фото клуба на весь экран."),
+    ("../c/index.html", "C · Город и кино", "", "Видео-облёт, стеклянная карточка встречи."),
+]
+
+
+def cards(items):
+    return "".join(f'<a class="v" href="{h}"><span class="v__t"><b>{t}</b>{f"<i>{tag}</i>" if tag else ""}</span><span>{d}</span></a>' for h, t, tag, d in items)
+
+
+(ROOT / "variants" / "index.html").write_text(f"""<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex"><title>Варианты сайта мастермайнда — Business Syndicate</title><link rel="icon" href="../assets/brand/logo-red.svg" type="image/svg+xml">
+<style>body{{margin:0;background:#0A0A0C;color:#F2F2F4;font:16px/1.5 system-ui,-apple-system,sans-serif;padding:clamp(24px,5vw,64px) 16px}}.w{{max-width:920px;margin:0 auto}}
+img{{width:44px;height:44px;margin-bottom:1rem}}h1{{margin:0 0 .4rem;font-size:clamp(1.6rem,4vw,2.4rem)}}h2{{margin:2.6rem 0 1rem;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:#9a9aa3}}
+p{{color:#9a9aa3;margin:0}}.g{{display:grid;gap:10px}}a.v{{display:grid;gap:.3rem;padding:1.1rem 1.2rem;border:1px solid #26262e;border-radius:14px;color:inherit;text-decoration:none;transition:border-color .2s}}
+a.v:hover{{border-color:#ED1824}}.v__t{{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}}.v__t b{{font-size:1.12rem}}.v__t i{{font-style:normal;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:#ED1824;color:#fff;padding:.25em .55em;border-radius:4px}}
+a.v span:last-child{{color:#c9c9d0}}.links{{margin-top:2.6rem;display:flex;gap:1.4rem;flex-wrap:wrap}}.links a{{color:#9a9aa3}}</style></head><body><div class="w">
+<img src="../assets/brand/logo-red.svg" alt="Business Syndicate">
+<h1>Варианты сайта мастермайнда</h1><p>Рабочий раздел: здесь лежат все варианты, чтобы сравнивать и выбирать. Основной сайт не меняется, пока не выбран финальный вариант.</p>
+<h2>Ролик MasterMind фоном · на текущем сайте</h2><div class="g">{cards(HUB_CARDS_VIDEO)}</div>
+<h2>Новые дизайны</h2><div class="g">{cards(HUB_CARDS_DESIGN)}</div>
+<div class="links"><a href="../versions/index.html">Все бэкапы версий →</a><a href="../index.html">Основной сайт →</a></div>
+</div></body></html>""", encoding="utf-8")
 print("ok variants/index.html")

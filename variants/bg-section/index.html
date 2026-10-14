@@ -92,15 +92,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Unbounded:wght@400;700;900&display=swap" rel="stylesheet">
 
   <!-- ============ Стили (порядок важен) ============ -->
-  <link rel="stylesheet" href="../../css/variables.css?v=11">
-  <link rel="stylesheet" href="../../css/reset.css?v=11">
-  <link rel="stylesheet" href="../../css/typography.css?v=11">
-  <link rel="stylesheet" href="../../css/components.css?v=11">
-  <link rel="stylesheet" href="../../css/sections.css?v=11">
-  <link rel="stylesheet" href="../../css/animations.css?v=11">
-  <link rel="stylesheet" href="../../css/responsive.css?v=11">
-  <link rel="stylesheet" href="../../css/upgrade.css?v=11">
-  <link rel="stylesheet" href="../../css/flight.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/variables.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/reset.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/typography.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/components.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/sections.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/animations.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/responsive.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/upgrade.css?v=11">
+  <link rel="stylesheet" href="../_v1/css/flight.css?v=11">
 
   <!-- ============ Библиотеки (CDN) ============ -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -251,8 +251,8 @@
     <!-- ✦ МАНИФЕСТ · слово навстречу -->
     <section class="mm-watch" aria-label="Смотри, как это работает"><div class="container">
       <p class="kicker">Смотри, как это работает</p>
-      <div class="mm-watch__frame"><video muted loop playsinline preload="metadata"></video>
-        <button class="mm-watch__btn" type="button">Смотреть со звуком</button></div>
+      <div class="mm-watch__frame"><video autoplay muted loop playsinline preload="metadata"></video>
+</div>
     </div></section>
 
     <section class="manifesto" aria-label="Связи решают">
@@ -835,26 +835,26 @@
   </div>
 
   <!-- ============ Скрипты (порядок важен) ============ -->
-  <script src="../../js/config.js?v=11" defer></script>
-  <script src="../../js/app.js?v=11" defer></script>
-  <script src="../../js/sky.js?v=11" defer></script>
-  <script src="../../js/smoothScroll.js?v=11" defer></script>
-  <script src="../../js/cursor.js?v=11" defer></script>
-  <script src="../../js/kinetic.js?v=11" defer></script>
-  <script src="../../js/particles.js?v=11" defer></script>
-  <script src="../../js/network.js?v=11" defer></script>
-  <script src="../../js/hero.js?v=11" defer></script>
-  <script src="../../js/animations.js?v=11" defer></script>
-  <script src="../../js/countdown.js?v=11" defer></script>
-  <script src="../../js/tilt.js?v=11" defer></script>
-  <script src="../../js/modal.js?v=11" defer></script>
-  <script src="../../js/form.js?v=11" defer></script>
-  <script src="../../js/gallery.js?v=11" defer></script>
-  <script src="../../js/hall.js?v=11" defer></script>
-  <script src="../../js/reel.js?v=11" defer></script>
+  <script src="../_v1/js/config.js?v=11" defer></script>
+  <script src="../_v1/js/app.js?v=11" defer></script>
+  <script src="../_v1/js/sky.js?v=11" defer></script>
+  <script src="../_v1/js/smoothScroll.js?v=11" defer></script>
+  <script src="../_v1/js/cursor.js?v=11" defer></script>
+  <script src="../_v1/js/kinetic.js?v=11" defer></script>
+  <script src="../_v1/js/particles.js?v=11" defer></script>
+  <script src="../_v1/js/network.js?v=11" defer></script>
+  <script src="../_v1/js/hero.js?v=11" defer></script>
+  <script src="../_v1/js/animations.js?v=11" defer></script>
+  <script src="../_v1/js/countdown.js?v=11" defer></script>
+  <script src="../_v1/js/tilt.js?v=11" defer></script>
+  <script src="../_v1/js/modal.js?v=11" defer></script>
+  <script src="../_v1/js/form.js?v=11" defer></script>
+  <script src="../_v1/js/gallery.js?v=11" defer></script>
+  <script src="../_v1/js/hall.js?v=11" defer></script>
+  <script src="../_v1/js/reel.js?v=11" defer></script>
   <script src="https://api-maps.yandex.ru/v3/?apikey=fc81e528-f99f-4381-9476-6a5e85a68f4a&lang=ru_RU" defer></script>
-  <script src="../../js/map.js?v=11" defer></script>
-  <script src="../../js/lazyload.js?v=11" defer></script>
+  <script src="../_v1/js/map.js?v=11" defer></script>
+  <script src="../_v1/js/lazyload.js?v=11" defer></script>
 
   <!-- SLOT: Яндекс.Метрика / VK-пиксель — вставить счётчики при деплое -->
 
@@ -884,19 +884,6 @@
       if (v.src.indexOf("mobile") === -1) { v.src = alt; var q = v.play(); if (q && q.catch) q.catch(function () {}); }
     });
     var p = v.play(); if (p && p.catch) p.catch(function () {});
-  });
-  /* вариант «блок со звуком»: по кнопке включаем полный ролик со звуком */
-  var btn = document.querySelector(".mm-watch__btn");
-  if (btn) btn.addEventListener("click", function () {
-    var v = document.querySelector(".mm-watch__frame video");
-    v.dataset.reel = "1";
-    var ext = webm === ".webm" ? ".webm" : ".mp4";
-    v.src = V + (mob ? "mastermind-reel-9x16-social" : "mastermind-reel-16x9-social") + ext;
-    /* нет горизонтального ролика со звуком — показываем вертикальный */
-    v.addEventListener("error", function () { if (v.src.indexOf("9x16") === -1) { v.src = V + "mastermind-reel-9x16-social" + ext; var q = v.play(); if (q && q.catch) q.catch(function () {}); } });
-    v.muted = false; v.loop = false; v.controls = true; v.currentTime = 0;
-    var p = v.play(); if (p && p.catch) p.catch(function () {});
-    btn.hidden = true;
   });
 })();
 </script>

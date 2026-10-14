@@ -1,0 +1,58 @@
+/* ============================================================
+   animations.css — keyframes и поддержка reduced-motion.
+   Основную режиссуру ведёт GSAP; здесь только фоновые циклы.
+   Все анимации — transform/opacity (GPU only).
+============================================================ */
+
+/* пульс свечения (финальная фаза таймера) */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 rgba(250,30,50,0); }
+  50%      { box-shadow: 0 0 24px rgba(250,30,50,0.4); }
+}
+
+/* индикатор скролла в Hero */
+@keyframes scrollPulse {
+  0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  60%  { transform: scaleY(1); transform-origin: top; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+
+/* расходящиеся круги пина на карте */
+@keyframes pinPulse {
+  0%   { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* тряска поля с ошибкой */
+@keyframes shake {
+  0%, 100% { transform: translate3d(0,0,0); }
+  25%      { transform: translate3d(-6px,0,0); }
+  75%      { transform: translate3d(6px,0,0); }
+}
+
+/* появление галочки успеха */
+@keyframes pop {
+  0%   { transform: scale(0); }
+  70%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* медленное дыхание фонового света Hero (почти незаметно) */
+@keyframes breathe {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); }
+  50%      { transform: translate3d(1.5%, -1%, 0) scale(1.04); }
+}
+.hero__glow { animation: breathe 14s var(--ease-inout) infinite; }
+
+/* ============================================================
+   ACCESSIBILITY: prefers-reduced-motion
+   Отключаем всё движение для тех, кому оно мешает.
+============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .hero__title .char { opacity: 1 !important; }
+}
